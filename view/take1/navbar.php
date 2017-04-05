@@ -18,7 +18,7 @@ $navbar = [
         ]
     ],
     "dropdown" => [
-        "namn" => "meny",
+        "namn" => "Dropdown",
         "items" => [
             "gissa" => [
                 "text" => "Guess the number",

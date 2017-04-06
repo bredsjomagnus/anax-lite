@@ -1,11 +1,14 @@
 <?php
+include "../config/route/session.php";
+
 /**
  * Routes.
  */
 $app->router->add("", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Hem", "urlstyle" => dirname($_SERVER['PHP_SELF'])."/css/style.css"]);
-    $app->view->add("take1/navbar");
+    // $app->view->add("take1/navbar");
+    $app->view->add("navbar2/navbar");
     $app->view->add("take1/home");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -18,7 +21,7 @@ $app->router->add("", function () use ($app) {
 $app->router->add("report", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Redovisningar", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("take1/navbar");
+    $app->view->add("navbar2/navbar");
     $app->view->add("take1/report");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -29,7 +32,7 @@ $app->router->add("report", function () use ($app) {
 
 $app->router->add("about", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Om", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("take1/navbar");
+    $app->view->add("navbar2/navbar");
     $app->view->add("take1/about");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -40,7 +43,7 @@ $app->router->add("about", function () use ($app) {
 
 $app->router->add("guessing", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Gissa", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("take1/navbar");
+    $app->view->add("navbar2/navbar");
     $app->view->add("take1/guessing");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");

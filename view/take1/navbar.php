@@ -18,24 +18,18 @@ $navbar = [
         ]
     ],
     "dropdown" => [
-        "namn" => "Dropdown",
+        "namn" => "Uppgifter",
         "items" => [
             "gissa" => [
                 "text" => "Guess the number",
                 "route" => "guessing"
+            ],
+            "session" => [
+                "text" => "Session",
+                "route" => "session"
             ]
         ]
     ]
-    // "dropdown1" => [
-    //     "namn" => "meny1",
-    //     "items" => [
-    //         "gissa" => [
-    //             "text" => "Gissa talet",
-    //             "route" => "guessing"
-    //         ]
-    //     ]
-    // ],
-
 ];
 
 /*
@@ -61,7 +55,7 @@ foreach ($navbar as $key => $value) {
     } else if ($key == "items") {
         foreach ($value as $itemkey => $link) {
             // echo "[" . $itemkey . " => " . $link . "]";
-            $navhtml .= "<li><a href='". $app->url->create($link['route']) ."'>".$link['text']."</a></li>";
+                $navhtml .= "<li><a href='". $app->url->create($link['route']) ."'>".$link['text']."</a></li>";
         }
     } else if ($key == "dropdown") {
         $navhtml .= "<li class='dropdown'>";

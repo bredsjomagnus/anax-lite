@@ -19,11 +19,14 @@ $app->response = new \Anax\Response\Response();
 $app->url     = new \Anax\Url\Url();
 $app->router  = new \Anax\Route\RouterInjectable();
 $app->view     = new \Anax\View\ViewContainer();
+$app->navbar   = new \Maaa16\Navbar\Navbar();
 
 // var_dump($app);
 
 // Inject $app into the view container for use in view files.
 $app->view->setApp($app);
+
+$app->navbar->setApp($app);
 
 // Update view configuration with values from config file.
 $app->view->configure("view.php");
@@ -42,6 +45,9 @@ $app->url->setScriptName($app->request->getScriptName());
 // Update url configuration with values from config file.
 $app->url->configure("url.php");
 $app->url->setDefaultsFromConfiguration();
+
+$app->navbar->configure("navbar.php");
+$app->navbar->setDefaultsFromConfiguration();
 
 // Create the router
 // $router = new \Anax\Route\RouterInjectable();

@@ -8,3 +8,7 @@ Första taggen. De nödvändiga komponenterna i ramverket är på plats, plus 'G
 v1.0.1
 ---------
 Lade till Navbar som klass med configfil samt test av $_SESSION.
+
+v1.0.2
+---------
+Lade till kalender.

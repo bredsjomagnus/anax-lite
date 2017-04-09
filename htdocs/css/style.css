@@ -1,6 +1,7 @@
 body {
   background-color: lightgray;
   margin-top: 70px;
+  overflow-x: scroll;
 }
 .page {
   min-height: 700px;
@@ -72,4 +73,145 @@ body {
 }
 .leftmessage {
   font-size: 45px;
+}
+.calendarimagediv img {
+  margin: 0 auto;
+  display: block;
+}
+.calendar {
+  border: 2px solid black;
+  margin: 0 auto;
+  margin-bottom: 80px;
+  overflow-x: scroll;
+}
+.calendar th {
+  border: 1px solid gray;
+  text-align: center;
+}
+.calendar td {
+  height: 110px;
+  border: 1px solid gray;
+  background-color: #a2a2a2;
+}
+.calendar .calday {
+  background-color: white;
+  min-width: 110px;
+}
+.calendar .caldiv {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #cecece;
+  margin-top: -54px;
+  text-align: center;
+  font-size: 20px;
+}
+.calendar .caldivred {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #da8484;
+  margin-top: -54px;
+  text-align: center;
+  font-size: 20px;
+}
+.calendar .caldivthisred {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #da8484;
+  -webkit-box-shadow: 1px 1px 5px 1px #3d78bf;
+  -moz-box-shadow: 1px 1px 5px 1px #3d78bf;
+  box-shadow: 1px 1px 5px 1px #3d78bf;
+  margin-top: -54px;
+  text-align: center;
+  font-size: 20px;
+}
+.calendar .calweek {
+  width: 20px;
+  background-color: #505050;
+  text-align: center;
+  color: white;
+}
+.calendar .thisday {
+  background-color: white;
+  -webkit-box-shadow: inset 0 0 5px 1px #3d78bf;
+  -moz-box-shadow: inset 0 0 5px 1px #3d78bf;
+  box-shadow: inset 0 0 5px 1px #3d78bf;
+}
+.calendar .caldivthis {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background-color: #cecece;
+  -webkit-box-shadow: 1px 1px 5px 1px #3d78bf;
+  -moz-box-shadow: 1px 1px 5px 1px #3d78bf;
+  box-shadow: 1px 1px 5px 1px #3d78bf;
+  margin-top: -54px;
+  text-align: center;
+  font-size: 20px;
+}
+.calendar .helgdiv {
+  position: relative;
+  height: 30px;
+  margin-top: -29px;
+  text-align: center;
+  font-size: 8px;
+  font-style: italic;
+  margin-left: 40px;
+}
+.calendar .helgdiv img {
+  float: left;
+  margin-top: 5px;
+}
+.calendar .helgdiv .flaggtext {
+  text-align: left;
+  margin-top: 5px;
+  padding-left: 1px;
+}
+.calendar .helgdiv .afton {
+  text-align: left;
+  margin-top: 5px;
+  padding-left: 1px;
+}
+.calendar .namesdiv {
+  font-size: 8px;
+  margin-left: 3px;
+  margin-bottom: -100px;
+}
+.glyphicon {
+  font-size: 30px;
+  color: #505050;
+  border-radius: 5px;
+}
+.caltitle {
+  width: 200px;
+}
+.prevnextdiv {
+  width: 40px;
+}
+.calendarheader {
+  font-size: 35px;
+  display: inline;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.calnextarrow {
+  margin-left: -20px;
+}
+.idagbtn {
+  margin-bottom: 10px;
+  background-color: #284262;
+  color: white;
+}
+.idagbtndiv {
+  padding-left: 85px;
+  padding-top: 8px;
+}
+.pillow-50 {
+  height: 50px;
 }

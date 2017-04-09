@@ -31,7 +31,11 @@ return [
                 "session" => [
                     "text" => "Session",
                     "route" => "session"
-                ]
+                ],
+                "calendar" => [
+                    "text" => "Kalender",
+                    "route" => "calendar"
+                ]    
             ]
         ]
     ]

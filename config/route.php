@@ -52,6 +52,17 @@ $app->router->add("guessing", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("calendar", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Kalender", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar");
+    $app->view->add("take1/calendar");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->addInternal("404", function () use ($app) {
         $app->view->add("take1/header", ["title" => "404", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
         $app->view->add("take1/notfound");

@@ -7,13 +7,24 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
     } else {
         $month = date('m');
     }
-    // $month = intval($_GET['month']);
-    $year = intval($_GET['year']);
-    $monthtext = date('M', mktime(0, 0, 0, $month, 1, $year));
 
-    // Hämtar och bearbetar information om $month och $year
-    $monthInfoJSON = file_get_contents("http://api.dryg.net/dagar/v2.1/". $year ."/". $month);
-    $monthInfoArray = json_decode($monthInfoJSON);
+    $year = intval($_GET['year']);
+    $monthtext = $calendar->getMonthString($month);
+
+
+    $datejson = "json/dateinfo/".$monthtext."-".$year.".json";
+
+    // Kollar om den rätta json filen existerar och hämtar informationen därifrån isf.
+    if (file_exists($datejson)) {
+        // Hämtar och bearbetar information om $month och $year
+        $monthInfoJSON = file_get_contents($datejson);
+        $monthInfoArray = json_decode($monthInfoJSON);
+    } else {
+        // Hämtar från dryg.net
+        $monthInfoJSON = file_get_contents("http://api.dryg.net/dagar/v2.1/". $year ."/". $month);
+        $monthInfoArray = json_decode($monthInfoJSON);
+    }
+
     $monthInfo = $calendar->extractMonthInfo($monthInfoArray);
 
     // Genererar kalender och bild för $month och $year
@@ -25,12 +36,23 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
 
     // ta fram dagens månad och år
     $month = intval(date('m'));
-    $monthtext = date('M');
+    $monthtext = $calendar->getMonthString($month);
     $year = intval(date('Y'));
 
-    // Hämtar och bearbetar information om $month och $year
-    $monthInfoJSON = file_get_contents("http://api.dryg.net/dagar/v2.1/". $year ."/". $month);
-    $monthInfoArray = json_decode($monthInfoJSON);
+
+    $datejson = "json/dateinfo/".$monthtext."-".$year.".json";
+
+    // Kollar om den rätta json filen existerar och hämtar informationen därifrån isf.
+    if (file_exists($datejson)) {
+        // Hämtar och bearbetar information om $month och $year
+        $monthInfoJSON = file_get_contents($datejson);
+        $monthInfoArray = json_decode($monthInfoJSON);
+    } else {
+        // Hämtar från dryg.net
+        $monthInfoJSON = file_get_contents("http://api.dryg.net/dagar/v2.1/". $year ."/". $month);
+        $monthInfoArray = json_decode($monthInfoJSON);
+    }
+
     $monthInfo = $calendar->extractMonthInfo($monthInfoArray);
 
     $d = $calendar->getDayInfo(14, $monthInfo);
@@ -99,7 +121,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
         <div class="pillow-50">
 
         </div>
-        <div class="col-md-2 col-md-offset-1">
+        <div class="col-md-3 col-md-offset-1">
             <?php
             // echo "<h2 class='calendarheader'>". $year ." ". $monthtext ."</h2>";
 
@@ -123,7 +145,7 @@ if (isset($_GET['month']) && isset($_GET['year'])) {
             echo "<span class='calendarheader'><a href={$prevurl}><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span></a>&nbsp;&nbsp;&nbsp;". $year ." ". $monthtext ." &nbsp;&nbsp;&nbsp;<div class='right calnextarrow'><a href={$nexturl}><span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></a></div></span>";
             ?>
         </div>
-        <div class="col-md-offset-2 col-md-1 idagbtndiv">
+        <div class="col-md-offset-1 col-md-1 idagbtndiv">
             <?php $thismonthurl = "calendar?month=". date('m') ."&year=". date('Y'); ?>
             <a name="today" class='idagbtn btn btn-default' href=<?= $thismonthurl ?>>IDAG</a>
 

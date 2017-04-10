@@ -20,6 +20,7 @@ $app->url     = new \Anax\Url\Url();
 $app->router  = new \Anax\Route\RouterInjectable();
 $app->view     = new \Anax\View\ViewContainer();
 $app->navbar   = new \Maaa16\Navbar\Navbar();
+$app->session   = new \Maaa16\Session\Session();
 
 // var_dump($app);
 

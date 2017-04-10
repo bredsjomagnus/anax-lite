@@ -8,7 +8,7 @@
 YEAR="$1"
 echo
 
-echo -e "\e[39m*************************************************** DATEINFO ***************************************************"
+echo -e "\e[39m************************* DATEINFO *************************"
 echo
 echo "Försöker ladda ner information för $YEAR"
 
@@ -22,7 +22,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/01"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > januari-$YEAR.json
+    echo -e "$json" > januari-"$YEAR".json
     echo -e "\e[92mjanuari-$YEAR.json har skapats"
 else
     echo -e "\e[31mjanuari-$YEAR.json kunde inte skapas"
@@ -38,7 +38,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/02"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > februari-$YEAR.json
+    echo -e "$json" > februari-"$YEAR".json
     echo -e "\e[92mfebruari-$YEAR.json har skapats"
 else
     echo -e "\e[31mfebruar-$YEAR.json kunde inte skapas"
@@ -54,7 +54,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/03"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > mars-$YEAR.json
+    echo -e "$json" > mars-"$YEAR".json
     echo -e "\e[92mmars-$YEAR.json har skapats"
 else
     echo -e "\e[31mmars-$YEAR.json kunde inte skapas"
@@ -70,7 +70,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/04"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > april-$YEAR.json
+    echo -e "$json" > april-"$YEAR".json
     echo -e "\e[92mapril-$YEAR.json har skapats"
 else
     echo -e "\e[31mapril-$YEAR.json kunde inte skapas"
@@ -86,7 +86,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/05"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > maj-$YEAR.json
+    echo -e "$json" > maj-"$YEAR".json
     echo -e "\e[92mmaj-$YEAR.json har skapats"
 else
     echo -e "\e[31mmaj-$YEAR.json kunde inte skapas"
@@ -102,7 +102,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/06"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > juni-$YEAR.json
+    echo -e "$json" > juni-"$YEAR".json
     echo -e "\e[92mjuni-$YEAR.json har skapats"
 else
     echo -e "\e[31mjuni-$YEAR.json kunde inte skapas"
@@ -118,7 +118,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/07"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > juli-$YEAR.json
+    echo -e "$json" > juli-"$YEAR".json
     echo -e "\e[92mjuli-$YEAR.json har skapats"
 else
     echo -e "\e[31mjuli-$YEAR.json kunde inte skapas"
@@ -134,7 +134,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/08"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > augusti-$YEAR.json
+    echo -e "$json" > augusti-"$YEAR".json
     echo -e "\e[92maugusti-$YEAR.json har skapats"
 else
     echo -e "\e[31maugusti-$YEAR.json kunde inte skapas"
@@ -150,7 +150,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/09"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > september-$YEAR.json
+    echo -e "$json" > september-"$YEAR".json
     echo -e "\e[92mseptember-$YEAR.json har skapats"
 else
     echo -e "\e[31mseptember-$YEAR.json kunde inte skapas"
@@ -166,7 +166,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/10"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > oktober-$YEAR.json
+    echo -e "$json" > oktober-"$YEAR".json
     echo -e "\e[92moktober-$YEAR.json har skapats"
 else
     echo -e "\e[31moktober-$YEAR.json kunde inte skapas"
@@ -182,7 +182,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/11"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > november-$YEAR.json
+    echo -e "$json" > november-"$YEAR".json
     echo -e "\e[92mnovember-$YEAR.json har skapats"
 else
     echo -e "\e[31mnovember-$YEAR.json kunde inte skapas"
@@ -198,7 +198,7 @@ json=${response:0:-3} #Jsonobjektet från anropet (tar bort statuskoden)
 echo "Status code: $STATUSCODE - http://api.dryg.net/dagar/v2.1/$YEAR/12"
 
 if [[ $STATUSCODE -eq 200 ]]; then
-    echo -e $json > december-$YEAR.json
+    echo -e "$json" > december-"$YEAR".json
     echo -e "\e[92mdecember-$YEAR.json har skapats"
 else
     echo -e "\e[31mdecember-$YEAR.json kunde inte skapas"

@@ -46,9 +46,9 @@ $app->router->add("session/status", function () use ($app) {
     // $app->view->add("take1/status");
     // $app->view->add("take1/byline");
     // $app->view->add("take1/footer");
-    $session = new Maaa16\Session\Session();
-    $session->start();
-    $data = $session->status();
+    $app->session = new Maaa16\Session\Session();
+    $app->session->start();
+    $data = $app->session->status();
 
     $app->response->sendJson($data);
 

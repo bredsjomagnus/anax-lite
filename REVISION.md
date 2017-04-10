@@ -12,3 +12,7 @@ Lade till Navbar som klass med configfil samt test av $_SESSION.
 v1.0.2
 ---------
 Lade till kalender.
+
+v2.0.0
+--------
+Finjusteringar och redovisningstext.

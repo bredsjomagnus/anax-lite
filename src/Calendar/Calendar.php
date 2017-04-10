@@ -5,6 +5,7 @@ class Calendar
 {
     private $images = array('image/januari.jpg?w=775', 'image/februari.jpg?w=775', 'image/mars.jpg?w=775','image/april.jpg?w=775', 'image/maj.jpg?w=775', 'image/juni.jpg?w=775', 'image/juli.jpg?w=775', 'image/augusti.jpg?w=775', 'image/september.jpg?w=775', 'image/oktober.jpg?w=775', 'image/november.jpg?w=775', 'image/december.jpg?w=775');
     private $weekdays = array('Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag','Söndag');
+    private $monthsString = array("januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december");
     private $currentday;
     private $currentmonth;
     private $currentyear;
@@ -238,6 +239,11 @@ class Calendar
     {
         $image = "<img src='". $this->images[$month-1] ."' alt='Kalenderbild' />";
         return $image;
+    }
+
+    public function getMonthString($monthnumber)
+    {
+        return $this->monthsString[$monthnumber-1];
     }
 }
     // public function test($month, $year)

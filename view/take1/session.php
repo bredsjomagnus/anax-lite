@@ -1,12 +1,14 @@
 <?php
-$session = new Maaa16\Session\Session();
-$session->start();
-if (!$session->has('number')) {
-    $session->set('number', 10);
+// $session = new Maaa16\Session\Session();
+// $session->start();
+$app->session = new Maaa16\Session\Session();
+$app->session->start();
+if (!$app->session->has('number')) {
+    $app->session->set('number', 10);
     $message = "<h3> &#36;_SESSION['number'] = 10</h3>";
     $message .= "<i>Initierar &#36;key 'number' och sätter den till 10</i>";
 } else {
-    $message = "<h3> &#36;_SESSION['number'] = " . $session->get('number') ." </h3>";
+    $message = "<h3> &#36;_SESSION['number'] = " . $app->session->get('number') ." </h3>";
     // $message .= "<p>" . $session->get('number') . "</p>";
 }
 

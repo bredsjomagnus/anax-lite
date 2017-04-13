@@ -1,8 +1,8 @@
 <?php
 // $session = new Maaa16\Session\Session();
 // $session->start();
-$app->session = new Maaa16\Session\Session();
-$app->session->start();
+// $app->session = new Maaa16\Session\Session();
+// $app->session->start();
 if (!$app->session->has('number')) {
     $app->session->set('number', 10);
     $message = "<h3> &#36;_SESSION['number'] = 10</h3>";

@@ -8,7 +8,7 @@ $app->router->add("", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Hem", "urlstyle" => dirname($_SERVER['PHP_SELF'])."/css/style.css"]);
     // $app->view->add("take1/navbar");
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => ""]);
     $app->view->add("take1/home");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -21,7 +21,7 @@ $app->router->add("", function () use ($app) {
 $app->router->add("report", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Redovisningar", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "report"]);
     $app->view->add("take1/report");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -32,8 +32,74 @@ $app->router->add("report", function () use ($app) {
 
 $app->router->add("about", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Om", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "about"]);
     $app->view->add("take1/about");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("login", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Logga in", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar", ["active" => "login"]);
+    $app->view->add("login/login");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("logout", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Logga in", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "login"]);
+    $app->view->add("login/logout");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("accountinfo", function () use ($app) {
+    $app->view->add("take1/header", ["title" => $app->cookie->get('user', ""), "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("login/accountinfo");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("validate", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Logga in", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "Logga in"]);
+    $app->view->add("login/validate");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("createuser", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Logga in", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "Logga in"]);
+    $app->view->add("login/create_user");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("welcome", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Lyckad inlogging", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar", ["active" => "Logga in"]);
+    $app->view->add("login/welcome");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
 
@@ -43,7 +109,7 @@ $app->router->add("about", function () use ($app) {
 
 $app->router->add("guessing", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Gissa", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
     $app->view->add("take1/guessing");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -54,8 +120,19 @@ $app->router->add("guessing", function () use ($app) {
 
 $app->router->add("calendar", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Kalender", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
     $app->view->add("take1/calendar");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("cookie", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Kalender", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+    $app->view->add("take1/cookie");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
 

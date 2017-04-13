@@ -7,10 +7,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">MAAA16</a>
+          <a class="navbar-brand" href=<?= $app->url->create("") ?>><img src="image/brand.png?w=80" alt=""></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <?= $app->navbar->generateNavbar(); ?>
+
+            <?= $app->navbar->generateNavbar($active); ?>
         </div>
     </div>
 </nav>

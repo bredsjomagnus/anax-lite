@@ -84,6 +84,7 @@ class Calendar
                     $calendar .= "<td class='calweek'>". $week ."</td>";
                 }
             } else {
+                // Är det inte söndag hämtas dagens information och ny dag i ny td skrivs ut.
                 $dayInfo = $this->getDayInfo($datum, $monthInfo);
                 $calendar .= $this->printTd($thismonth, $datum, $dayInfo);
             }
@@ -100,7 +101,7 @@ class Calendar
             }
         }
 
-        // Avslutar sista raden och tabellen
+        // Avslutar sista raden och till slut tabellen
         $calendar .= "</tr>";
         $calendar .= "</table>";
 
@@ -246,20 +247,3 @@ class Calendar
         return $this->monthsString[$monthnumber-1];
     }
 }
-    // public function test($month, $year)
-    // {
-    //     $thismonth = FALSE;
-    //     if ($year == $this->currentyear) {
-    //         if ($month == $this->currentmonth) {
-    //             $thismonth = TRUE;
-    //         }
-    //     }
-    //
-    //     if ($thismonth) {
-    //         $text = "Dagens månad";
-    //     } else {
-    //         $text = "Inte dagens månad";
-    //     }
-    //
-    //     return $text;
-    // }

@@ -4,7 +4,7 @@ if (isset($_POST['guessing'])) {
     if (isset($_POST['guessfield'])) {
         $name = substr(preg_replace('/[^a-z\d]/i', '', __DIR__), -30);
         session_name($name);
-        session_start();
+        // session_start();
         $guesserial = $_SESSION['guess'];
         $guess = unserialize($guesserial);
         // $guess->addNumberGuessesDone();
@@ -48,7 +48,7 @@ if (isset($_POST['guessing'])) {
 } else {
     $name = substr(preg_replace('/[^a-z\d]/i', '', __DIR__), -30);
     session_name($name);
-    session_start();
+    // session_start();
 
     $number_guesses_done = 1;
     $guess = new \Maaa16\Guess\Guess("random", $number_guesses_done);

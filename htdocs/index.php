@@ -14,27 +14,30 @@ require ANAX_INSTALL_PATH . "/vendor/autoload.php";
 
 // Add all resources to $app
 $app = new \Maaa16\App\App();
-$app->request = new \Anax\Request\Request();
-$app->response = new \Anax\Response\Response();
-$app->url     = new \Anax\Url\Url();
-$app->router  = new \Anax\Route\RouterInjectable();
-$app->view     = new \Anax\View\ViewContainer();
-$app->navbar   = new \Maaa16\Navbar\Navbar();
+$app->request   = new \Anax\Request\Request();
+$app->response  = new \Anax\Response\Response();
+$app->url       = new \Anax\Url\Url();
+$app->router    = new \Anax\Route\RouterInjectable();
+$app->view      = new \Anax\View\ViewContainer();
+$app->navbar    = new \Maaa16\Navbar\Navbar();
 $app->session   = new \Maaa16\Session\Session();
+$app->cookie    = new \Maaa16\Cookie\Cookie();
+$app->database  = new \Maaa16\Database\Database();
 
 // var_dump($app);
+$app->session->start();
 
+// Inject $app into the view container for use in view files.
 // Inject $app into the view container for use in view files.
 $app->view->setApp($app);
 
+// Inject $app into navbar to get access to urls
 $app->navbar->setApp($app);
 
 // Update view configuration with values from config file.
 $app->view->configure("view.php");
 
-
 $app->request->init();
-
 
 // Set default values from the request object.
 $app->url->setSiteUrl($app->request->getSiteUrl());
@@ -50,6 +53,11 @@ $app->url->setDefaultsFromConfiguration();
 $app->navbar->configure("navbar.php");
 $app->navbar->setDefaultsFromConfiguration();
 
+$app->database->configure("database.php");
+$app->database->setDefaultsFromConfiguration();
+
+
+// $app->database->connect();
 // Create the router
 // $router = new \Anax\Route\RouterInjectable();
 
@@ -57,39 +65,10 @@ $app->navbar->setDefaultsFromConfiguration();
 require ANAX_INSTALL_PATH . "/config/route.php";
 
 /**
- * Routes. Enligt instruktionen
+ * Routekataloger
  */
-// require __DIR__ . "/route/internal.php";
-// require __DIR__ . "/route/base.php";
-
-/**
- * Routes. Mitt eget försök
- */
-// require ANAX_INSTALL_PATH . "/route/internal.php";
-// require ANAX_INSTALL_PATH . "/route/base.php";
-
-
+require ANAX_INSTALL_PATH . "/config/route/internal.php";
+require ANAX_INSTALL_PATH . "/config/route/base.php";
 
 // Leave to router to match incoming request to routes
 $app->router->handle($app->request->getRoute(), $app->request->getMethod());
-
-
-// Create some urls.
-// $aUrl = $app->url->create("");
-// echo "<p><a href='$aUrl'>The index url, home</a> ($aUrl)";
-//
-// $aUrl = $app->url->create("some/route");
-// echo "<p><a href='$aUrl'>Url to some/route</a> ($aUrl)";
-//
-// $aUrl = $app->url->create("some/where/some/route");
-// echo "<p><a href='$aUrl'>Another url to some/where/some/route</a> ($aUrl)";
-
-
-// $urlHome  = $app->url->create("");
-// $urlAbout = $app->url->create("about");
-// $navbar = <<<EOD
-// <navbar>
-//     <a href="$urlHome">Home</a> |
-//     <a href="$urlAbout">About</a>
-// </navbar>
-// EOD;

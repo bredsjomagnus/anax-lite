@@ -6,7 +6,7 @@
 $app->router->add("session", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Session", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
     $app->view->add("take1/session");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");
@@ -59,7 +59,7 @@ $app->router->add("session/status", function () use ($app) {
 $app->router->add("session/dump", function () use ($app) {
     // $urlstyle = dirname($_SERVER['PHP_SELF'])."/css/style.css";
     $app->view->add("take1/header", ["title" => "Sessiondump", "urlstyle" => dirname(dirname(dirname($_SERVER['PHP_SELF'])))."/css/style.css"]);
-    $app->view->add("navbar2/navbar");
+    $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
     $app->view->add("take1/sessiondump");
     $app->view->add("take1/byline");
     $app->view->add("take1/footer");

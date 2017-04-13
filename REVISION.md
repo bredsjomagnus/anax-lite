@@ -16,3 +16,7 @@ Lade till kalender.
 v2.0.0
 --------
 Finjusteringar och redovisningstext.
+
+v2.0.1
+--------
+Loginfunktion. Påbörjat med profilsida.

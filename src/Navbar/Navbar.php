@@ -29,7 +29,28 @@ class Navbar implements \Anax\Common\ConfigureInterface
         return $this;
     }
 
-    public function generateDropdown($navhtml)
+    public function generateLinks($itemkey, $navhtml, $link, $class)
+    {
+        if ($itemkey != 'login' && $itemkey != 'logout') {
+            // Med undantag för login och logout visa de länkarna utan förbehåll.
+            $navhtml .= "<li><a class='{$class}' href='". $this->app->url->create($link['route']) ."'>".$link['text']."</a></li>";
+        } else {
+            if ($itemkey == 'login' && !$this->app->session->has('user')) {
+                // Om man kommer till login och man inte är inloggad redan så visa den länken
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."'>".$link['text']."</a></li>";
+            } else if ($itemkey == 'logout' && $this->app->session->has('user')) {
+                // Om man kommer till logout och man är inloggad så visa den knappen
+                $navhtml .= "<li style='float: right'><a class='{$class}' href='". $this->app->url->create($link['route']) ."'>".$link['text']."</a></li>";
+
+                // För att se om accountinfo är aktiv eller inte kontrolleras route via PATH_INFO¨.
+                $accountclass = ((isset($_SERVER['PATH_INFO'])) && $_SERVER['PATH_INFO'] == "/accountinfo") ? "navactive" : "notnavacitve";
+                $navhtml .= "<li style='float: right'><a class='{$accountclass}' href='". $this->app->url->create('accountinfo') ."'>". $this->app->cookie->get('forname', "") ."</a></li>";
+            }
+        }
+        return $navhtml;
+    }
+
+    public function generateDropdown($navhtml, $active)
     {
         foreach ($this->navbar as $key => $value) {
             if ($key == "dropdown") {
@@ -41,7 +62,8 @@ class Navbar implements \Anax\Common\ConfigureInterface
                 foreach ($value as $dropkey => $link) {
                     if ($dropkey == "namn") {   //sätter ut namnet på dropdownmenyn
                         // echo $link;
-                        $navhtml .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>". $link ." <span class='caret'></span></a>";
+                        $class = ($active == "dropdown") ? "dropdown-toggle navactive" : "dropdown-toggle notnavacitve";
+                        $navhtml .= "<a href='#' class='{$class}' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>". $link ." <span class='caret'></span></a>";
                         $navhtml .= "<ul class='dropdown-menu'>";
                     } else if ($dropkey == "items") {    //sätter ut länkarna i dropdownmenyn
                         foreach ($link as $droplink) {
@@ -62,7 +84,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
      *
      * @return string as HTML with the navbar.
      */
-    public function generateNavbar()
+    public function generateNavbar($active)
     {
         foreach ($this->navbar as $key => $value) {
             // echo $key;
@@ -73,31 +95,13 @@ class Navbar implements \Anax\Common\ConfigureInterface
             } else if ($key == "items") {
                 foreach ($value as $itemkey => $link) {
                     // echo "[" . $itemkey . " => " . $link . "]";
-                        $itemkey;
-                        $navhtml .= "<li><a href='". $this->app->url->create($link['route']) ."'>".$link['text']."</a></li>";
+                    $itemkey;
+                    $class = ($active == $link['route']) ? "navactive" : "notnavacitve";
+                    $class = $class . " " . $link['class'];
+                    $navhtml = $this->generateLinks($itemkey, $navhtml, $link, $class);
                 }
             } else if ($key == "dropdown") {
-                $navhtml = $this->generateDropdown($navhtml);
-                //
-                // $navhtml .= "<li class='dropdown'>";
-                //
-                // /*
-                // * Är det är en dropdown kollar man först efter $dropkey == namn för att sätta namn på dropdownmenyn
-                // * därefter $dropkey == items för att sätta ut länkarna i menyn.
-                // */
-                // foreach ($value as $dropkey => $link) {
-                //     if ($dropkey == "namn") {   //sätter ut namnet på dropdownmenyn
-                //         // echo $link;
-                //         $navhtml .= "<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>". $link ." <span class='caret'></span></a>";
-                //         $navhtml .= "<ul class='dropdown-menu'>";
-                //     } else if ($dropkey == "items") {    //sätter ut länkarna i dropdownmenyn
-                //         foreach ($link as $droplink) {
-                //             $navhtml .= "<li><a class='dropdownlink' href='". $this->app->url->create($droplink['route']) ."' style='color: white;'>".$droplink['text']."</a></li>";
-                //         }
-                //     }
-                // }
-                // $navhtml .= "</ul>";
-                // $navhtml .= "</li>";
+                $navhtml = $this->generateDropdown($navhtml, $active);
             }
         }
 

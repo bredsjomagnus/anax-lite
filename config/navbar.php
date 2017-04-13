@@ -9,20 +9,33 @@ return [
         ],
         "items" => [
             "hem" => [
-                "text" => "Hem",
+                "text" => "HEM",
                 "route" => "",
+                "class" => ""
             ],
             "redovisning" => [
-                "text" => "Redovisningar",
+                "text" => "REDOVISNINGAR",
                 "route" => "report",
+                "class" => ""
             ],
             "om" => [
-                "text" => "Om",
+                "text" => "OM",
                 "route" => "about",
+                "class" => ""
+            ],
+            "login" => [
+                "text" => "LOGGA IN",
+                "route" => "login",
+                "class" => ""
+            ],
+            "logout" => [
+                "text" => "LOGGA UT",
+                "route" => "logout",
+                "class" => ""
             ]
         ],
         "dropdown" => [
-            "namn" => "Uppgifter",
+            "namn" => "UPPGIFTER",
             "items" => [
                 "gissa" => [
                     "text" => "Guess the number",
@@ -32,12 +45,15 @@ return [
                     "text" => "Session",
                     "route" => "session"
                 ],
+                "cookie" => [
+                    "text" => "Cookie",
+                    "route" => "cookie"
+                ],
                 "calendar" => [
                     "text" => "Kalender",
                     "route" => "calendar"
-                ]    
+                ]
             ]
         ]
     ]
 ];
-// return "fisk";

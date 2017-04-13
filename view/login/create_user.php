@@ -19,7 +19,12 @@ if ($forname == null || $surname == null || $email == null || $username == null 
         $sql = "INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES (?, ?, ?, ?, ?, ?)";
         $params = ['user', $username, $securepass, $forname, $surname, $email];
         $sth = $app->database->execute($sql, $params);
-        header('Location: login');
+        $app->session->set("user", $username);
+        // $app->session->set("forname", $res[0]->forname);
+        $app->cookie->set("user", $username);
+        $app->cookie->set("forname", $forname);
+        // $app->cookie->set("name", $app->database->get($))
+        header("Location: welcome");
     } else {
         $_SESSION['createusererrormsg'] = "<br /><p class='formerror'>Nytt konto skapades inte.</p><p class='formerror'>Lösenordet var inte samma vid upprepning.</p>";
         header('Location: login');

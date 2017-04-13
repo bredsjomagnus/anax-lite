@@ -275,9 +275,10 @@ body {
   margin-bottom: 10px;
   border-bottom: 1px solid #7b0202;
 }
-.profildiv {
-  overflow: hidden;
-  width: 180px;
-  height: 180px;
-  background-color: darkgray;
+.info {
+  font-size: 12px;
+  color: gray;
+}
+.well {
+  background-color: #b4b4b4;
 }

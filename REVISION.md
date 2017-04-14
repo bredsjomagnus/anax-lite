@@ -20,3 +20,7 @@ Finjusteringar och redovisningstext.
 v2.0.1
 --------
 Loginfunktion. Påbörjat med profilsida.
+
+v2.0.2
+--------
+Inloggningsfunktion i princip klar.

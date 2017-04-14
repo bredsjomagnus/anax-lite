@@ -21,7 +21,7 @@ if (isset($_POST['loginsubmit'])) {
         // echo $user;
         // echo password_hash('pass', PASSWORD_DEFAULT);
         $app->database->connect();
-        $sql = "SELECT * FROM accounts WHERE username = '$loginuser'";
+        $sql = "SELECT * FROM accounts WHERE BINARY username = BINARY '$loginuser'";
         if ($res = $app->database->executeFetchAll($sql)) {
             $dbpass = $res[0]->pass;
             $passwordverify = password_verify($loginpass, $dbpass);

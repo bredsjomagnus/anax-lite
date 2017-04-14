@@ -3,6 +3,7 @@ if (!$app->session->has('user')) {
     header("Location: login");
 }
 $msg = "";
+$passerror = "";
 $username = $app->session->get('user');
 $app->database->connect();
 $sql = "SELECT * FROM accounts WHERE username = '$username'";
@@ -64,7 +65,31 @@ if (isset($_POST['editaccount'])) {
     $app->database->execute($sql, $params);
     header('Location: logout');
 } else if (isset($_POST['editpassword'])) {
+
     //Här skall jag fixa nästa gång
+    $oldpassedit = (isset($_POST['oldpass']) && $_POST['oldpass'] != "") ? htmlentities($_POST['oldpass']) : null;
+    $newpassoneedit = (isset($_POST['newpassone']) && $_POST['newpassone'] != "") ? htmlentities($_POST['newpassone']) : null;
+    $newpasstwoedit = (isset($_POST['newpasstwo']) && $_POST['newpasstwo'] != "") ? htmlentities($_POST['newpasstwo']) : null;
+
+    $app->database->connect();
+    $sql = "SELECT * FROM accounts WHERE username = '$username'";
+    if ($res = $app->database->executeFetchAll($sql)) {
+        $oldpass = $res[0]->pass;
+        if (password_verify($oldpassedit, $oldpass)) {
+            if($newpassoneedit == $newpasstwoedit) {
+                $sql = "UPDATE accounts SET pass = ? WHERE username = ?";
+                $securepass = password_hash($newpassoneedit, PASSWORD_DEFAULT);
+                $params = [$securepass, $username];
+                $sth = $app->database->execute($sql, $params);
+                header('Location: changedpassword');
+            } else {
+                $passerror = "<p>De nya lösenordet var inte samma i båda fälten. Försök igen.</p>";
+            }
+        } else {
+            $passerror = "<p>Felaktigt nuvanrande lösenord. Försök igen.</p>";
+        }
+    }
+
 }
 ?>
 
@@ -106,6 +131,7 @@ if (isset($_POST['editaccount'])) {
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#editpasswordcollapse" aria-expanded="false" aria-controls="editpasswordcollapse">
                 Ändra lösenord
                 </button>
+                <?= $passerror ?>
             </div>
 
             <div class="col-md-5">

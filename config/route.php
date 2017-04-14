@@ -96,6 +96,17 @@ $app->router->add("createuser", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("changedpassword", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Ändrat lösenord", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+    $app->view->add("navbar2/navbar", ["active" => "account"]);
+    $app->view->add("login/changedpassword");
+    $app->view->add("take1/byline");
+    $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("welcome", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Lyckad inlogging", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
     $app->view->add("navbar2/navbar", ["active" => "Logga in"]);

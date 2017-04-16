@@ -35,7 +35,11 @@ class Database implements \Anax\Common\ConfigureInterface
         }
     }
 
-
+    public function setApp($app)
+    {
+        $this->app = $app;
+        return $this;
+    }
 
     /**
      * Do SELECT with optional parameters and return a resultset.
@@ -131,57 +135,87 @@ class Database implements \Anax\Common\ConfigureInterface
         // return "fisk";
     }
 
-
-    // FROM CONNECT
-    /**
-     * Adds user to the database
-     * @param $user string The name of the user
-     * @param $pass string The user's password
-     * @return void
-     */
-    public function addUser($user, $pass)
-    {
-        $stmt = $this->db->prepare("INSERT into users (name, pass) VALUES ('$user', '$pass')");
-        $stmt->execute();
-    }
-
-    /**
-     * Gets the hashed password from the database
-     * @param $user string The user to get password from/for
-     * @return string The hashed password
-     */
-    public function getHash($user)
-    {
-        $stmt = $this->db->prepare("SELECT pass FROM users WHERE name='$user'");
-        $stmt->execute();
-
-        $res = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $res["pass"];
-    }
-
-    /**
-     * Changes the password for a user
-     * @param $user string The usr to change the password for
-     * @param $pass string The password to change to
-     * @return void
-     */
-    public function changePassword($user, $pass)
-    {
-        $stmt = $this->db->prepare("UPDATE users SET pass='$pass' WHERE name='$user'");
-        $stmt->execute();
-    }
-
-    /**
-     * Check if user exists in the database
-     * @param $user string The user to search for
-     * @return bool true if user exists, otherwise false
-     */
-    public function exists($user)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM accounts WHERE username='$user'");
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return !$row ? false : true;
-    }
+    // public function generateTable($res)
+    // {
+    //     $table = "<table class='admintable'>";
+    //     $table .=   "<thead>
+    //                     <tr>
+    //                         <th></th>
+    //                         <th>Roll</th>
+    //                         <th>Användarnamn</th>
+    //                         <th>Förnamn</th>
+    //                         <th>Efternamn</th>
+    //                         <th>Email</th>
+    //                         <th>Datum</th>
+    //                         <th></th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>";
+    //     foreach ($res as $row) {
+    //         $default = "http://i.imgur.com/CrOKsOd.png"; // Optional
+    //         $gravatar = new \Maaa16\Gravatar\Gravatar($row->email, $default);
+    //         $gravatar->size = 30;
+    //         $gravatar->rating = "G";
+    //         $gravatar->border = "FF0000";
+    //
+    //         $editurl = $this->app->url->create('edituser') ."?username=".$row->username;
+    //
+    //         $table .=   "<tr>
+    //                         <td>".$gravatar->toHTML()."</td>
+    //                         <td>".$row->role."</td>
+    //                         <td>".$row->username."</td>
+    //                         <td>".$row->forname."</td>
+    //                         <td>".$row->surname."</td>
+    //                         <td>".$row->email."</td>
+    //                         <td>".$row->created."</td>
+    //                         <td><a href='$editurl'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a></td>
+    //                     </tr>";
+    //     }
+    //     $table .=   "</tbody>
+    //                 </table>";
+    //     // return substr($table, 0, -2);
+    //     return $table;
+    // }
+    // public function generateEditTable($res)
+    // {
+    //     $table = "<form action='edituserprocess' method='POST'>";
+    //     $table .= "<table class='admintable'>";
+    //     $table .=   "<thead>
+    //                     <tr>
+    //                         <th></th>
+    //                         <th>Roll</th>
+    //                         <th>Användarnamn</th>
+    //                         <th>Förnamn</th>
+    //                         <th>Efternamn</th>
+    //                         <th>Email</th>
+    //                         <th>Datum</th>
+    //                         <th></th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>";
+    //     foreach ($res as $row) {
+    //         $default = "http://i.imgur.com/CrOKsOd.png"; // Optional
+    //         $gravatar = new \Maaa16\Gravatar\Gravatar($row->email, $default);
+    //         $gravatar->size = 40;
+    //         $gravatar->rating = "G";
+    //         $gravatar->border = "FF0000";
+    //
+    //         $table .=   "<tr>
+    //                         <td>".$gravatar->toHTML()."</td>
+    //                         <td><input type='text' name='role' value='".$row->role."' /></td>
+    //                         <td>".$row->username."</td>
+    //                         <td><input type='text' name='forname' value='".$row->forname."' /></td>
+    //                         <td><input type='text' name='surname' value='".$row->surname."' /></td>
+    //                         <td><input type='email' name='email' value='".$row->email."' /></td>
+    //                         <td>".$row->created."</td>
+    //                     </tr>";
+    //     }
+    //     $table .=   "</tbody>
+    //                 </table>
+    //                 <input type='hidden' name='username' value='".$row->username."' />
+    //                 <input type='submit' class='btn btn-default right' name='edituserbtn' value='Ändra' />
+    //                 </form>";
+    //     // return substr($table, 0, -2);
+    //     return $table;
+    // }
 }

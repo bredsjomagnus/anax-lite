@@ -74,6 +74,83 @@ $app->router->add("accountinfo", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("adminpage", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminpage");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("edituser", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Redigera användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/edituser");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admincreateuser", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Lägg till användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admincreateuser");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("deleteuser", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Ta bort användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/deleteuser");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("edituserprocess", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Redigera användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/edituserprocess");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admincreateuserprocess", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Redigera användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admincreateuserprocess");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admineditpasswordprocess", function () use ($app) {
+    // $app->view->add("take1/header", ["title" => "Redigera användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admineditpasswordprocess");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("validate", function () use ($app) {
     // $app->view->add("take1/header", ["title" => "Logga in", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "Logga in"]);

@@ -17,17 +17,17 @@ if (isset($_POST['loginsubmit'])) {
     if ($userdone && $passdone) {
         $loginuser =  htmlentities($_POST["user"]);
         $loginpass =  htmlentities($_POST["pass"]);
-        // password_verify($user_pass, $crypt_pass);
-        // echo $user;
-        // echo password_hash('pass', PASSWORD_DEFAULT);
         $app->database->connect();
         $sql = "SELECT * FROM accounts WHERE BINARY username = BINARY '$loginuser'";
         if ($res = $app->database->executeFetchAll($sql)) {
             $dbpass = $res[0]->pass;
             $passwordverify = password_verify($loginpass, $dbpass);
-
-            if ($passwordverify) {
+            if ($res[0]->active != 'yes') {
+                $loginmsg = "<span class='formerror'>&nbsp;&nbsp;&nbsp; Konto deaktiverat av administratör.</span>";
+            } else if ($passwordverify) {
                 $app->session->set("user", $loginuser);
+                $app->session->set("role", $res[0]->role);
+                $app->session->set("hash", password_hash($loginpass, PASSWORD_DEFAULT));
                 // $app->session->set("forname", $res[0]->forname);
                 $app->cookie->set("user", $loginuser);
                 $app->cookie->set("forname", $res[0]->forname);
@@ -131,7 +131,7 @@ if (isset($_POST['loginsubmit'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Ångra</button>
-                            <button type="submit" class="btn btn-primary">Skapa konto</button>
+                            <button type="submit" name='createuserbtn' class="btn btn-primary">Skapa konto</button>
                         </div>
                     </form>
                 </div>

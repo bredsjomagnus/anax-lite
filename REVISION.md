@@ -24,3 +24,7 @@ Loginfunktion. Påbörjat med profilsida.
 v2.0.2
 --------
 Inloggningsfunktion i princip klar.
+
+v2.0.3
+--------
+I princip klar med inloggningsfunktioner och administratörsfunktioner.

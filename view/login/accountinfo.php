@@ -4,6 +4,8 @@ if (!$app->session->has('user')) {
 }
 $msg = "";
 $passerror = "";
+$adminurl = $app->url->create('adminpage');
+$adminrow = ($app->session->get('role') == 'admin') ? "<tr><td><b>Roll</b></td><td><a href='$adminurl'>Administratör</a></td></tr>": "";
 $username = $app->session->get('user');
 $app->database->connect();
 $sql = "SELECT * FROM accounts WHERE username = '$username'";
@@ -65,31 +67,31 @@ if (isset($_POST['editaccount'])) {
     $app->database->execute($sql, $params);
     header('Location: logout');
 } else if (isset($_POST['editpassword'])) {
-
-    //Här skall jag fixa nästa gång
     $oldpassedit = (isset($_POST['oldpass']) && $_POST['oldpass'] != "") ? htmlentities($_POST['oldpass']) : null;
     $newpassoneedit = (isset($_POST['newpassone']) && $_POST['newpassone'] != "") ? htmlentities($_POST['newpassone']) : null;
     $newpasstwoedit = (isset($_POST['newpasstwo']) && $_POST['newpasstwo'] != "") ? htmlentities($_POST['newpasstwo']) : null;
-
-    $app->database->connect();
-    $sql = "SELECT * FROM accounts WHERE username = '$username'";
-    if ($res = $app->database->executeFetchAll($sql)) {
-        $oldpass = $res[0]->pass;
-        if (password_verify($oldpassedit, $oldpass)) {
-            if($newpassoneedit == $newpasstwoedit) {
-                $sql = "UPDATE accounts SET pass = ? WHERE username = ?";
-                $securepass = password_hash($newpassoneedit, PASSWORD_DEFAULT);
-                $params = [$securepass, $username];
-                $sth = $app->database->execute($sql, $params);
-                header('Location: changedpassword');
+    if ($oldpassedit != null && $newpassoneedit != null && $newpasstwoedit != null) {
+        $app->database->connect();
+        $sql = "SELECT * FROM accounts WHERE username = '$username'";
+        if ($res = $app->database->executeFetchAll($sql)) {
+            $oldpass = $res[0]->pass;
+            if (password_verify($oldpassedit, $oldpass)) {
+                if ($newpassoneedit == $newpasstwoedit) {
+                    $sql = "UPDATE accounts SET pass = ? WHERE username = ?";
+                    $securepass = password_hash($newpassoneedit, PASSWORD_DEFAULT);
+                    $params = [$securepass, $username];
+                    $sth = $app->database->execute($sql, $params);
+                    header('Location: changedpassword');
+                } else {
+                    $passerror = "<p>De nya lösenordet var inte samma i båda fälten. Försök igen.</p>";
+                }
             } else {
-                $passerror = "<p>De nya lösenordet var inte samma i båda fälten. Försök igen.</p>";
+                $passerror = "<p>Felaktigt nuvanrande lösenord. Försök igen.</p>";
             }
-        } else {
-            $passerror = "<p>Felaktigt nuvanrande lösenord. Försök igen.</p>";
         }
+    } else {
+        $passerror = "<p>Nytt lösenord får inte vara tomt.</p>";
     }
-
 }
 ?>
 
@@ -107,6 +109,7 @@ if (isset($_POST['editaccount'])) {
         </div>
 
         <table class="table accounttable">
+            <?= $adminrow ?>
             <tr>
                 <td><b>Användarnamn</b></td><td><?= $username ?></td>
             </tr>

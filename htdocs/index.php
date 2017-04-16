@@ -33,6 +33,7 @@ $app->view->setApp($app);
 
 // Inject $app into navbar to get access to urls
 $app->navbar->setApp($app);
+$app->database->setApp($app);
 
 // Update view configuration with values from config file.
 $app->view->configure("view.php");

@@ -33,7 +33,6 @@ class DBTable
         * $numobjects = antalet objekt i databasen
         */
         $app->database->connect();
-
         $search = "WHERE ". $tableproporties[3] ." LIKE '".$tableproporties[4]."' ";
 
         $sql = "SELECT * FROM accounts $search";

@@ -9,6 +9,10 @@
         <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom02" aria-expanded="false" aria-controls="kmom02">
             Kmom02
         </a>
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom03" aria-expanded="false" aria-controls="kmom03">
+            Kmom03
+        </a>
+
         <div class="collapse" id="kmom01">
             <div class="pillow-50">
 
@@ -31,6 +35,9 @@
                 <p>Jag gillade övningen och tyckte den gav mycket. Det är, för mig, inte trivialt när man skall till att joina tabeller eller liknande. Men att denna övningen rätade ut några av frågetecknen. Kul.</p>
             </div>
         </div>
+        <!-- /kmom01 -->
+
+        <!-- kmom02 -->
         <div class="collapse" id="kmom02">
             <div class="pillow-50">
 
@@ -69,6 +76,51 @@
                 <p>Som en parentes har jag för övrigt haft mycket nytta av vad SQL-artikeln, övningen och uppgiften gav. Jag håller alltmer på att gå över som ansvarig för skolans datorer och i ambitionen att göra en adminsida har jag lagt in elever och datorer i databas via Workbench (som jag inte kände till förut) och joinat tabeller och skapat views. Mycket smidigt och dessutom extra kul när så tydligt ser nyttan av vunnen kunskap i ett verkligt projekt.</p>
             </div>
         </div>
+        <!-- /kmom02 -->
+
+        <!-- kmom03 -->
+        <div class="collapse" id="kmom03">
+            <div class="pillow-50">
+
+            </div>
+            <div class="well reportwell">
+                <h2>Kmom03</h2>
+
+
+                <h3>Hur kändes det att jobba med PHP PDO, SQL och MySQL?</h3>
+                <p>Det känns både bekant och nytt samtidigt. Det är mycket att ta in. Men kul samtidigt. Mycket matnyttigt, så att säga.</p>
+
+
+                <h3>Reflektera kring koden du skrev för att lösa uppgifterna, klasser, formulär, integration Anax Lite?</h3>
+                <p>Det tillkom tre ny klasser detta kursmoment - Cookie, DBTable och Gravatar. Den sistnämnda har jag inte kodat själv utan var en klass öppen för fri användning till den som ville använda Gravatar-avatarer.</p>
+
+                <p>Av dessa är det bara Cookie som är integrerad i ramverket av den anledningen att de andra mer är som tillägg till innehållet och inte en del av strukturen.</p>
+
+                <p>Jag ville ha en klass för så renodlad funktion som möjligt så att man lättare kan återanvända dem. Därför har jag inte en klass som speciellt sköter inloggningen utan ville att Database skulle ta hand om den biten så att all databashantering är samlad på ett ställe genom så få metoder som möjligt.</p>
+
+                <p>DBTable tar hand om tabellernas sökning, sortering, paginering och generering till HTML med hjälp av parametrarna [antal rader per sida, kolumnnamn som skall sorteras efter, asc/desc, kolumn att söka på, söksträng]. Denna används för att få fram alla tabeller, både för avläsning och editering av databas. Jag försökte injecta $app i DBTable, så som gjorts i exempelvis navbar. Men det lät sig inte göras, så i nuläget skickar jag med $app som argument. Får se om jag kan komma tillrätta med det längre fram.</p>
+
+                <p>Delar av vyerna har mycket PHP i sig. Detta för att jag ville hantera formulären på plats vid vissa tillfällen. Medan jag i övriga fall valt att förlägga processerna separat. </p>
+
+
+                <h3>Känner du dig hemma i ramverket, dess komponenter och struktur?</h3>
+                <p>Mycket mer nu än i början. Men jag är fortfarande osäker på vissa saker. Antar att min variant på lösning av att lägga in en stil inte är vad man egentligen skall göra. Jag lägger in sökvägen som en variabel till headern. Det är inte optimalt när man har olika djupa folders att skicka ifrån då jag måste lägga ytterligaren en dirname() runt pathen. Men det var ett sätt att få till något som sen blivit kvar. Hur skall man göra egentligen?</p>
+
+                <p>Men när det kommer till hur $app kan fungera och användas samt olika sätt att lägga till klasser så börjar jag få lite koll.</p>
+
+                <p>Det känns bra att dimmorna har börjat skingras lite. Även om det finns bitar kvar som jag inte skulle kunna förklara hur eller varför för en oinvigd.</p>
+
+
+                <h3>Hur bedömer du svårighetsgraden på kursens inledande kursmoment, känner du att du lär dig något/bra saker?</h3>
+                <p>Tycker nog inte det varit så mycket svårare än andra kurser. Det vill säga, en hel del utmaningar, men som löser sig om man ger sig attans på det (ibland med hjälp ifrån Gitter).</p>
+
+                <p>Däremot har det varit väldigt mycket. Det har känts som små projektarbeten i hur mycket som skall lämnas in. Det är tur det varit påsklov för min del, så jag hunnit sitta med plugget mer än vanligt. Så länge det inte blir alltför mycket ser jag det dock inte som ett problem. Jag vill få ut så mycket jag bara kan av kurserna och skulle bli besviken om det inte gavs rejäla uppgifter och utmaningar.</p>
+
+                <p>Tycker jag fått med mig mycket bra så här långt i kursen. Framför allt sqldelen och, för min del, mycket mer klarhet i cookies och sessions.. Men även ramverket faktiskt. Jag ser allt mer tjusningen att arbete i ett och inser att jag kommer vilja använda det även fortsättningsvis. Behöver bara få lite mer kläm på alla delar bara.</p>
+
+            </div>
+        </div>
+        <!-- /kmom03 -->
 
     </div>
 </div>

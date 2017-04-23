@@ -20,7 +20,7 @@ a:visited {
   color: #b77e7e;
 }
 .admintable thead th {
-  padding: 0 25px;
+  padding: 0 10px;
   margin: 0;
 }
 .admintable th,
@@ -32,10 +32,13 @@ a:visited {
 }
 .admintable tr td {
   height: 50px;
-  padding: 0 25px;
+  padding: 0 10px;
 }
 .admintable input {
   color: black;
+}
+.admintable .datetimecell {
+  width: 185px;
 }
 .right {
   float: right;
@@ -78,4 +81,13 @@ span.glyphiconarrow {
 }
 .pillow-20 {
   height: 20px;
+}
+textarea.form-control {
+  height: 200px;
+}
+.terminateinfo {
+  color: #ffb69e;
+}
+.contenttable th {
+  max-height: 20px;
 }

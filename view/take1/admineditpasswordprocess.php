@@ -16,7 +16,7 @@ if (isset($_POST['admineditpasswordbtn'])) {
                 $securepass = password_hash($newpassoneedit, PASSWORD_DEFAULT);
                 $params = [$securepass, $id];
                 $sth = $app->database->execute($sql, $params);
-                header('Location: adminpage');
+                header('Location: adminpageusers');
             } else {
                 $app->session->set('passerror', "<p>De nya lösenordet var inte samma i båda fälten. Försök igen.</p>");
                 header('Location: edituser?id='.$id);

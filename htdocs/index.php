@@ -23,6 +23,7 @@ $app->navbar    = new \Maaa16\Navbar\Navbar();
 $app->session   = new \Maaa16\Session\Session();
 $app->cookie    = new \Maaa16\Cookie\Cookie();
 $app->database  = new \Maaa16\Database\Database();
+$app->block     = new \Maaa16\Block\Block();
 
 // var_dump($app);
 $app->session->start();
@@ -34,6 +35,7 @@ $app->view->setApp($app);
 // Inject $app into navbar to get access to urls
 $app->navbar->setApp($app);
 $app->database->setApp($app);
+$app->block->setApp($app);
 
 // Update view configuration with values from config file.
 $app->view->configure("view.php");

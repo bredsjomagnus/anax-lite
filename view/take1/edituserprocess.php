@@ -14,8 +14,8 @@ if (isset($_POST['edituserbtn'])) {
         $sql = "UPDATE accounts SET active = ?, role= ?, forname = ?, surname = ?, email = ? WHERE id = ?";
         $params = [$activeedit, $roleedit, $fornameedit, $surnameedit, $emailedit, $id];
         $sth = $app->database->execute($sql, $params);
-        header('Location: adminpage');
+        header('Location: adminpageusers');
     } else {
-        header('Location: adminpage');
+        header('Location: adminpageusers');
     }
 }

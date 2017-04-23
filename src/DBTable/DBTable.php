@@ -4,47 +4,65 @@ namespace Maaa16\DBTable;
 class DBTable
 {
 
-    public function generateDBTable($app, $tableproporties = [5, 'username', 'desc', 'username', ''])
+    public function generateDBTableUsers($app, $tableproporties = ["pages" => 5, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
-        $table = $this->toHtmlSearch($paginatorarray, $app);
+        $table = $this->toHtmlSearchUsers($paginatorarray, $app);
         return $table;
     }
-    public function generateDBTableEdit($app, $tableproporties = [5, 'username', 'desc', 'username', ''])
+    public function generateDBTableContent($app, $tableproporties = ["pages" => 5, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'title', "searchfield" => '%%', "databasetable" => 'content'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
-        $table = $this->toHtmlEdit($paginatorarray);
+        $table = $this->toHtmlSearchContent($paginatorarray, $app);
         return $table;
     }
 
-    public function generateDBTableEditPassword($app, $tableproporties = [5, 'username', 'desc', 'username', ''])
+    public function generateDBTableEditUsers($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
+    {
+        $paginatorarray = $this->paginator($app, $tableproporties);
+        $table = $this->toHtmlEditUsers($paginatorarray);
+        return $table;
+    }
+
+    public function generateDBTableEditContent($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'title', "searchfield" => '%%', "databasetable" => 'content'])
+    {
+        $paginatorarray = $this->paginator($app, $tableproporties);
+        $table = $this->toHtmlEditContent($paginatorarray);
+        return $table;
+    }
+
+    public function generateDBTableEditPassword($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
         $table = $this->toHtmlEditPassword($paginatorarray);
         return $table;
     }
 
+    // nya paginator
     private function paginator($app, $tableproporties)
     {
-
+        $dbtable = $tableproporties['databasetable'];
         // $tableproporties = [antal rader per sida, kolumnnamn som skall sorteras efter, asc eller desc beroende på ordning, kolumn att söka på, söksträng]
         /*
         * Connectar till databasen och räknar antalet Objekt utefter vad man sökt efter
         * $numobjects = antalet objekt i databasen
         */
         $app->database->connect();
-        $search = "WHERE ". $tableproporties[3] ." LIKE '".$tableproporties[4]."' ";
+        $search = "WHERE ". $tableproporties['searchcolumn'] ." LIKE '".$tableproporties['searchfield']."' ";
+        // $search = "WHERE ". $tableproporties['searchcolumn'] ." LIKE ? ";
 
-        $sql = "SELECT * FROM accounts $search";
+        $sql = "SELECT * FROM $dbtable $search";
+        // $params = [$tableproporties['searchfield']];
         $params = [];
         $preres = $app->database->executeFetchAll($sql, $params);
+        // $preres = $app->database->execute($sql, $params);
         $numobjects = count($preres);
 
         /*
         * Sätter begränsningen på antalet objekt per sida med $tableproporties[0]
         * Sätter vilken som är sista sidan med $lastpage
         */
-        $lastpage = ceil($numobjects/$tableproporties[0]);
+        $lastpage = ceil($numobjects/$tableproporties['pages']);
         if ($lastpage < 1) {
             $lastpage = 1;
         }
@@ -69,15 +87,18 @@ class DBTable
 
         // $search = "WHERE ". $tableproporties[3] ." LIKE '%".$tableproporties[4]."%' ";
 
+        // $sql = "UPDATE chromebookusers SET roll = ?, klass= ?, fornamn = ?, efternamn = ?, konto = ?, dator= ? WHERE id = ?";
+        // $search = "WHERE ". $tableproporties['searchcolumn'] ." LIKE '".$tableproporties['searchfield']."' ";
+        $search = "WHERE ". $tableproporties['searchcolumn'] ." LIKE ? ";
 
-        $search = "WHERE ". $tableproporties[3] ." LIKE '".$tableproporties[4]."' ";
-
-        $limit = 'LIMIT ' .($pagenum - 1 ) * $tableproporties[0] . ', ' . $tableproporties[0];
-        $order = 'ORDER BY ' . $tableproporties[1] ." ". $tableproporties[2]. " ";
+        $limit = 'LIMIT ' .($pagenum - 1 ) * $tableproporties['pages'] . ', ' . $tableproporties['pages'];
+        $order = 'ORDER BY ' . $tableproporties['orderby'] ." ". $tableproporties['orderas']. " ";
         // $search = "WHERE ". $tableproporties[3] ." LIKE '%".$tableproporties[4]."%' ";
-        $sql = "SELECT * FROM accounts $search $order $limit";
-        $params = [];
-        $res = $app->database->executeFetchAll($sql, $params);
+        $sql = "SELECT * FROM $dbtable $search $order $limit";
+        // $params = [];
+        $params = [$tableproporties['searchfield']];
+        // $res = $app->database->executeFetchAll($sql, $params);
+        $res = $app->database->execute($sql, $params);
 
         $textline1 = "Object (".$numobjects.")";
         $textline2 = "Sida ".$pagenum." av ".$lastpage;
@@ -97,7 +118,81 @@ class DBTable
         return $pagenatorarray;
     }
 
-    public function leftside($pagenum, $pagenationrow)
+    // gamla paginator
+    // private function paginator($app, $tableproporties)
+    // {
+    //
+    //     // $tableproporties = [antal rader per sida, kolumnnamn som skall sorteras efter, asc eller desc beroende på ordning, kolumn att söka på, söksträng]
+    //     /*
+    //     * Connectar till databasen och räknar antalet Objekt utefter vad man sökt efter
+    //     * $numobjects = antalet objekt i databasen
+    //     */
+    //     $app->database->connect();
+    //     $search = "WHERE ". $tableproporties[3] ." LIKE '".$tableproporties[4]."' ";
+    //
+    //     $sql = "SELECT * FROM accounts $search";
+    //     $params = [];
+    //     $preres = $app->database->executeFetchAll($sql, $params);
+    //     $numobjects = count($preres);
+    //
+    //     /*
+    //     * Sätter begränsningen på antalet objekt per sida med $tableproporties[0]
+    //     * Sätter vilken som är sista sidan med $lastpage
+    //     */
+    //     $lastpage = ceil($numobjects/$tableproporties[0]);
+    //     if ($lastpage < 1) {
+    //         $lastpage = 1;
+    //     }
+    //
+    //     /*
+    //     * Sätter starten på pagenatorn till 1.
+    //     * Kontrollerar sedan om det finns någon information att hämta i adressraden.
+    //     * med preg_replace ser man till att $_GET['pn'] bara kan vara siffror.
+    //     * Ser sedan till att $pagenum inte kan vara mindre än 1 eller mer än $lastpage
+    //     */
+    //     $pagenum = (isset($_GET['pn'])) ? preg_replace('#[^0-9]#', '', $_GET['pn']) : 1;
+    //     if ($pagenum < 1) {
+    //         $pagenum = 1;
+    //     } else if ($pagenum > $lastpage) {
+    //         $pagenum = $lastpage;
+    //     }
+    //
+    //     /*
+    //     * Söker efter objekten i databasen med begränsning $limit
+    //     */
+    //     // $app->database->connect();
+    //
+    //     // $search = "WHERE ". $tableproporties[3] ." LIKE '%".$tableproporties[4]."%' ";
+    //
+    //
+    //     $search = "WHERE ". $tableproporties[3] ." LIKE '".$tableproporties[4]."' ";
+    //
+    //     $limit = 'LIMIT ' .($pagenum - 1 ) * $tableproporties[0] . ', ' . $tableproporties[0];
+    //     $order = 'ORDER BY ' . $tableproporties[1] ." ". $tableproporties[2]. " ";
+    //     // $search = "WHERE ". $tableproporties[3] ." LIKE '%".$tableproporties[4]."%' ";
+    //     $sql = "SELECT * FROM accounts $search $order $limit";
+    //     $params = [];
+    //     $res = $app->database->executeFetchAll($sql, $params);
+    //
+    //     $textline1 = "Object (".$numobjects.")";
+    //     $textline2 = "Sida ".$pagenum." av ".$lastpage;
+    //
+    //     $pagenationrow = "<ul class='pagination'>";
+    //     if ($lastpage != 1) {
+    //         $pagenationrow = $this->leftside($pagenum, $pagenationrow);
+    //
+    //         $pagenationrow .= "<li><a class='paginatoractive'>".$pagenum."</a></li>";
+    //
+    //         $pagenationrow = $this->rightside($pagenum, $lastpage, $pagenationrow);
+    //     }
+    //     $pagenationrow .= "</ul>";
+    //     $pagenatorarray = array('res' => $res, 'max' =>  $textline1, 'current' => $textline2, 'ctrl' => $pagenationrow);
+    //     // $table = $this->toHtmlSearch($pagenatorarray, $app);
+    //     // return $table;
+    //     return $pagenatorarray;
+    // }
+
+    private function leftside($pagenum, $pagenationrow)
     {
         if ($pagenum > 1) {
             $previous = $pagenum - 1;
@@ -116,7 +211,8 @@ class DBTable
         }
         return $pagenationrow;
     }
-    public function rightside($pagenum, $lastpage, $pagenationrow)
+
+    private function rightside($pagenum, $lastpage, $pagenationrow)
     {
         for ($i = $pagenum+1; $i <= $lastpage; $i += 1) {
             if ($i < $pagenum+4) {
@@ -147,7 +243,7 @@ class DBTable
      *
      * @return string with links to order by column.
      */
-    public function orderby($column)
+    private function orderby($column)
     {
         $orderby =  "<span class='orderby'>
                         <a href='?order={$column}&orderas=asc'><span class='glyphiconarrow glyphicon glyphicon-menu-down' aria-hidden='true'></span></a>
@@ -156,7 +252,7 @@ class DBTable
         return $orderby;
     }
 
-    public function toHtmlSearch($pagenatorarray, $app)
+    private function toHtmlSearchUsers($pagenatorarray, $app)
     {
         /*
         * $pagenatorarray = max, current, ctrl
@@ -220,7 +316,70 @@ class DBTable
 
         return $table;
     }
-    public function toHtmlEdit($pagenatorarray)
+
+    private function toHtmlSearchContent($pagenatorarray, $app)
+    {
+        $table = "";
+        $table = "<table class='admintable contenttable'>";
+        $table .= "<thead>
+                <tr>
+                   <th>Id ".$this->orderby('id')."</th>
+                   <th>Titel ".$this->orderby('title')."</th>
+                   <th>Sökväg ".$this->orderby('path')."</th>
+                   <th>Slug ".$this->orderby('slug')."</th>
+                   <th>Typ ".$this->orderby('type')."</th>
+                   <th>Status ".$this->orderby('status')."</th>
+                   <th class='datetimecell'>Publicerad ".$this->orderby('published')."</th>
+                   <th>Skapad ".$this->orderby('created')."</th>
+                   <th class='datetimecell'>Uppdaterad ".$this->orderby('updated')."</th>
+                   <th class='datetimecell'>Borttagen ".$this->orderby('deleted')."</th>
+                   <th colspan='4'>Val</th>
+               </tr>
+               <tbody>";
+        foreach ($pagenatorarray['res'] as $row) {
+            $publishclass = "";
+            $terminate = "";
+            $deleteclass = "glyphicon glyphicon-remove-circle";
+            if ($row->status == 'notPublished') {
+                $publishclass = "glyphicon glyphicon-share";
+            } else if ($row->status == 'Published') {
+                $publishclass = "glyphicon glyphicon-lock";
+            } else if ($row->status == 'isDeleted') {
+                $deleteclass = "glyphicon glyphicon-repeat";
+                $terminate = "<td><a href='".$app->url->create('adminterminatecontent')."?id=".$row->id."'><span class='glyphicon glyphicon-trash' aria-hidden='true'></span></a></td>";
+            }
+            if ($row->type == 'page') {
+                $titleurl = $app->url->create('pagefromadmin')."?route=".$row->path;
+                $title = "<a href='$titleurl'>$row->title</a>";
+            } else {
+                $title = $row->title;
+            }
+            $table .= "<tr>
+                <td>".$row->id."</td>
+                <td>".$title."</td>
+                <td>".$row->path."</td>
+                <td>".$row->slug."</td>
+                <td>". $row->type."</td>
+                <td>". $row->status."</td>
+                <td>". $row->published."</td>
+                <td>". $row->created."</td>
+                <td>". $row->updated."</td>
+                <td>". $row->deleted."</td>
+                <td><a href='".$app->url->create('adminpublishcontent')."?id=".$row->id."&status=".$row->status."'><span class='$publishclass' aria-hidden='true'></span></a></td>
+                <td><a href='".$app->url->create('admineditcontent')."?id=".$row->id."'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></a></td>
+                <td><a href='".$app->url->create('admindeletecontent')."?id=".$row->id."&status=".$row->status."'><span class='$deleteclass' aria-hidden='true'></span></a></td>
+                $terminate
+            </tr>";
+        }
+        $table .=   "</tbody>
+                    </table>";
+
+        $table .= "<div class='col-md-12>'<nav><div class='paginatordiv'>".$pagenatorarray['ctrl']."</div></nav></div>";
+
+        return $table;
+    }
+
+    private function toHtmlEditUsers($pagenatorarray)
     {
         $table = "<form action='edituserprocess' method='POST'>";
         $table .= "<table class='admintable'>";
@@ -280,7 +439,50 @@ class DBTable
         return $table;
     }
 
-    public function toHtmlEditPassword($pagenatorarray)
+    private function toHtmlEditContent($pagenatorarray)
+    {
+        $table = "<form action='admineditcontentprocess' method='POST'>";
+        foreach ($pagenatorarray['res'] as $row) {
+            $table .=   "<div class='form-group'>
+                            <label>TITEL</label>
+                            <input class='form-control' type='text' name='contentTitle' value='".$row->title."'/>
+                        </div>
+                        <div class='form-group'>
+                            <label>SÖKVÄG</label>
+                            <input class='form-control' type='text' name='contentPath' value='".$row->path."'/>
+                        </div>
+                        <div class='form-group'>
+                            <label>SLUG</label>
+                            <input class='form-control' type='text' name='contentSlug' value='".$row->slug."'/>
+                        </div>
+                        <div class='form-group'>
+                            <label>INNEHÅLL</label>
+                            <textarea class='form-control' name='contentData'>".htmlentities($row->data)."</textarea>
+                        </div>
+                        <div class='form-group'>
+                            <label>TYP</label>
+                            <select name='contentType'>
+                                <option value='page'>page</option>
+                                <option value='post'>post</option>
+                                <option value='block'>block</option>
+                            </select>
+                        </div>
+                        <div class='form-group'>
+                            <label>FILTER</label>
+                            <input class='form-control' type='text' name='contentFilter' value='".$row->filter."'/>
+                        </div>";
+        }
+        $table .=   "
+                    <input type='hidden' name='contentId' value='".htmlentities($row->id)."' />
+                    <input type='submit' class='btn btn-default right' name='editcontentbtn' value='Spara' />
+                    </form>";
+
+        // <input class='form-control' type='text' name='contentType' value='".$row->type."'/>
+        
+        return $table;
+    }
+
+    private function toHtmlEditPassword($pagenatorarray)
     {
         $table = "<form action='admineditpasswordprocess' method='POST'>";
         $table .= "<table class='admintable'>";

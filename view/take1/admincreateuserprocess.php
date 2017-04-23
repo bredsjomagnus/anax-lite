@@ -31,7 +31,7 @@ if (isset($_POST['admincreateuserbtn'])) {
             // $app->cookie->set("user", $username);
             // $app->cookie->set("forname", $forname);
             // $app->cookie->set("name", $app->database->get($))
-            header("Location: adminpage");
+            header("Location: adminpageusers");
         }
     }
 }

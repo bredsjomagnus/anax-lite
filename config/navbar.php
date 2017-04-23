@@ -52,6 +52,18 @@ return [
                 "calendar" => [
                     "text" => "Kalender",
                     "route" => "calendar"
+                ],
+                "page" => [
+                    "text" => "Databassidor",
+                    "route" => "page"
+                ],
+                "blog" => [
+                    "text" => "Blogg",
+                    "route" => "blog"
+                ],
+                "blocktest" => [
+                    "text" => "Test av block",
+                    "route" => "blocktest"
                 ]
             ]
         ]

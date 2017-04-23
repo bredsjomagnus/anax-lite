@@ -14,8 +14,15 @@ if (isset($_GET['id'])) {
         // $id = $res[0]->id;
         $msg = $forname . " " . $surname;
         $dbtable = new \Maaa16\DBTable\DBTable();
-        $tableproporties = [1, 'id', 'desc', 'id', $id];
-        $dbtabletohtml = $dbtable->generateDBTableEdit($app, $tableproporties);
+        $tableproporties = [
+                            "pages"         => 1,
+                            "orderby"       => 'id',
+                            "orderas"       => 'desc',
+                            "searchcolumn"  => 'id',
+                            "searchfield"   => $id,
+                            "databasetable" => 'accounts'
+                        ];
+        $dbtabletohtml = $dbtable->generateDBTableEditUsers($app, $tableproporties);
         $dbtablepasswordtohtml = $dbtable->generateDBTableEditPassword($app, $tableproporties);
     } else {
         $dbtabletohtml = "Kunde inte koppla upp mot databas och hämta informationen.";
@@ -25,7 +32,7 @@ if (isset($_GET['id'])) {
 <div class="page">
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
-            <a href=<?= $app->url->create("adminpage") ?>>Tillbaka</a>
+            <a href=<?= $app->url->create("adminpageusers") ?>>Tillbaka</a>
         </div>
     </div>
     <div class="row">

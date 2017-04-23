@@ -85,6 +85,61 @@ $app->router->add("adminpage", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("adminpageusers", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminpageusers");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminpagecontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminpagecontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admincreatecontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admincreatecontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admineditcontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admineditcontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admineditcontentprocess", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admineditcontentprocess");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("edituser", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Redigera användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
@@ -100,6 +155,39 @@ $app->router->add("admincreateuser", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Lägg till användare", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
     $app->view->add("take1/admincreateuser");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminpublishcontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Ta bort innehåll", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminpublishcontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admindeletecontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Ta bort innehåll", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admindeletecontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminterminatecontent", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Ta bort innehåll", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminterminatecontent");
     // $app->view->add("take1/byline");
     // $app->view->add("take1/footer");
 
@@ -228,38 +316,99 @@ $app->router->add("cookie", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("page", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "page", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/page");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("blocktest", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "page", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/blocktest");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("block/{blockslug}", function ($blockslug) use ($app) {
+        // $app->view->add("take1/header", ["title" => "page", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        // $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/block", ["blockslug" => $blockslug]);
+        // $app->view->add("take1/byline");
+        // $app->view->add("take1/footer");
+        // $blockdata = $blockslug;
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("blog", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "Blogg", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/blog");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("blogpost", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "Bloggpost", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/blogpost");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("createblogpost", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "Bloggpost", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "dropdown"]);
+        $app->view->add("take1/createblogpost");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("pagefromadmin", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "page", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+        $app->view->add("take1/pagefromadmin");
+        $app->view->add("take1/byline");
+        $app->view->add("take1/footer");
+        $app->response->setBody([$app->view, "render"])
+                      ->send();
+        // $app->response->setBody($body)->send(404);
+});
+
+
 $app->router->addInternal("404", function () use ($app) {
         $app->view->add("take1/header", ["title" => "404", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
         $app->view->add("take1/notfound");
-//     $currentRoute = $app->request->getRoute();
-//     $routes = "<ul>";
-//     foreach ($app->router->getAll() as $route) {
-//         $routes .= "<li>'" . $route->getRule() . "'</li>";
-//     }
-//     $routes .= "</ul>";
-//
-//     $intRoutes = "<ul>";
-//     foreach ($app->router->getInternal() as $route) {
-//         $intRoutes .= "<li>'" . $route->getRule() . "'</li>";
-//     }
-//     $intRoutes .= "</ul>";
-//
-//     $body = <<<EOD
-//     <!doctype html>
-//     <meta charset="utf-8">
-//     <title>404</title>
-//     <h1>404 Not Found</h1>
-//     <p>The route '$currentRoute' could not be found!</p>
-//     <h2>Routes loaded</h2>
-//     <p>The following routes are loaded:</p>
-//     $routes
-//     <p>The following internal routes are loaded:</p>
-//     $intRoutes
-// EOD;
 
     $app->response->setBody([$app->view, "render"])
                   ->send(404);
-    // $app->response->setBody($body)->send(404);
+});
+
+$app->router->add("404dbpage", function () use ($app) {
+        $app->view->add("take1/header", ["title" => "404", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/style.css"]);
+        $app->view->add("take1/notfounddbpage");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send(404);
 });
 
 $app->router->add("status", function () use ($app) {

@@ -28,3 +28,7 @@ Inloggningsfunktion i princip klar.
 v2.0.3
 --------
 I princip klar med inloggningsfunktioner och administratörsfunktioner.
+
+v.4.0.0
+--------
+Klar med kmom04.

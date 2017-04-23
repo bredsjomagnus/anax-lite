@@ -12,6 +12,9 @@
         <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom03" aria-expanded="false" aria-controls="kmom03">
             Kmom03
         </a>
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom04" aria-expanded="false" aria-controls="kmom04">
+            Kmom04
+        </a>
 
         <div class="collapse" id="kmom01">
             <div class="pillow-50">
@@ -118,6 +121,17 @@
 
                 <p>Tycker jag fått med mig mycket bra så här långt i kursen. Framför allt sqldelen och, för min del, mycket mer klarhet i cookies och sessions.. Men även ramverket faktiskt. Jag ser allt mer tjusningen att arbete i ett och inser att jag kommer vilja använda det även fortsättningsvis. Behöver bara få lite mer kläm på alla delar bara.</p>
 
+            </div>
+        </div>
+        <!-- /kmom03 -->
+
+        <!-- kmom03 -->
+        <div class="collapse" id="kmom04">
+            <div class="pillow-50">
+
+            </div>
+            <div class="well reportwell">
+                <?= $app->block->getBlock('kmom04'); ?>
             </div>
         </div>
         <!-- /kmom03 -->

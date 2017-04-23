@@ -1,11 +1,12 @@
 -- show databases;
-use test;
+use maaa16;
 
 drop table if exists accounts;
 
 create table if not exists accounts
 (
 id int(5) auto_increment primary key,
+active char(5) default 'yes',
 role char(20) not null,
 username varchar(20) not null unique,
 pass char(100) not null,
@@ -25,9 +26,11 @@ INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('us
 INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('user', 'mrsmiss', '$2y$10$fHsLBWbf6kdLs6tRKGfTF.octwVFB.40RHncXCS4LiqTUTDjftGx6', 'Liv', 'Alared', 'lalred83@gmail.com'); -- liv
 INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('user', 'helle', '$2y$10$/QqVJ2693qwjgMhXXMpEOOcykBn80OuBaNnZ4X7s5L1f7oD5/uCW.', 'Helen', 'Henriksson', 'helhaik65@yahoo.se'); -- helle
 INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('user', 'klara', '$2y$10$tTFc1b/FT8QOyMVIpcbZreOtKdiTc2/PGpZkmogGEA6fEZVDWm0Vm', 'Klara', 'Ericsson', 'bredsjoklara@gmail.com'); -- klara
+INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('admin', 'admin', '$2y$10$Ml94egY/SRVxswtwPlUXbeeoe.t8krAXcb7t0r6U74uXOMtooirBu', 'admin', 'admin', 'admin@admin.se'); -- admin
+INSERT INTO accounts (role, username, pass, forname, surname, email) VALUES ('user', 'doe', '$2y$10$GRrdHbpyhiVVdVCRfTh4E.Og72bo8VPj/Fh4HAeapEiSSl10WoS.C', 'doe', 'doe', 'doe@doe.se'); -- doe
 
 
--- select * from accounts;
+select * from accounts;
 
 -- SELECT * FROM accounts where username LIKE 'magand' order by id asc limit 3;
 

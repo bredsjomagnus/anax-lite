@@ -25,13 +25,13 @@ if (isset($_POST['deleteuserbtn'])) {
     $sql = "DELETE FROM accounts WHERE id = ?";
     $params = [$id];
     $app->database->execute($sql, $params);
-    header('Location: adminpage');
+    header('Location: adminpageusers');
 }
 ?>
 <div class="page">
     <div class="row">
         <div class="col-md-2 col-md-offset-1">
-            <a href=<?= $app->url->create("adminpage") ?>>Tillbaka</a>
+            <a href=<?= $app->url->create("adminpageusers") ?>>Tillbaka</a>
         </div>
     </div>
     <div class="row">

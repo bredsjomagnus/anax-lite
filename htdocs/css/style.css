@@ -296,8 +296,48 @@ textarea.form-control {
 hr {
   border-top: 1px solid #7b0202;
 }
+img[alt='size_90'] {
+  width: 90%;
+  border: none;
+  background: none;
+}
+img[alt='size_80'] {
+  width: 80%;
+  border: none;
+  background: none;
+}
+img[alt='size_70'] {
+  width: 70%;
+  border: none;
+  background: none;
+}
+img[alt='size_60'] {
+  width: 60%;
+  border: none;
+  background: none;
+}
 img[alt='size_50'] {
   width: 50%;
+  border: none;
+  background: none;
+}
+img[alt='size_40'] {
+  width: 40%;
+  border: none;
+  background: none;
+}
+img[alt='size_30'] {
+  width: 30%;
+  border: none;
+  background: none;
+}
+img[alt='size_20'] {
+  width: 20%;
+  border: none;
+  background: none;
+}
+img[alt='size_10'] {
+  width: 10%;
   border: none;
   background: none;
 }

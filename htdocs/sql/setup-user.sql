@@ -1,5 +1,5 @@
 -- show databases;
-use maaa16;
+use test;
 
 drop table if exists accounts;
 

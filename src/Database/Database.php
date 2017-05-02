@@ -84,6 +84,34 @@ class Database implements \Anax\Common\ConfigureInterface
         return $sth;
     }
 
+    public function executeProcedure($sql, $param = [], $paramType = [])
+    {
+        $sth = $this->pdo->prepare($sql);
+        if (!$sth) {
+            $this->statementException($sth, $sql, $param);
+        }
+        $counter = 1;
+        foreach ($param as $input) {
+            // print_r($input);
+            if ($paramType[$input] == 'str') {
+                // $sth->bindParam($counter, $input, \PDO::PARAM_INPUT_OUTPUT, $paramType[$input][1]);
+                // $sth->bindParam($bindNames[$counter], $input, \PDO::PARAM_STR, $paramType[$input][1]);
+                // $sth->bindValue($bindNames[$counter], $input, \PDO::PARAM_STR);
+                $sth->bindValue($counter, $input, \PDO::PARAM_STR);
+            } else if ($paramType[$input] == 'int') {
+                $sth->bindValue($counter, $input, \PDO::PARAM_INT);
+            }
+
+            $counter += 1;
+        }
+        $status = $sth->execute();
+        if (!$status) {
+            $this->statementException($sth, $sql, $param);
+        }
+
+        return $sth;
+
+    }
 
 
     /**

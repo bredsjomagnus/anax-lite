@@ -107,6 +107,61 @@ $app->router->add("adminpagecontent", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("adminpagewebbshop", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminpagewebbshop");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminwebbshopaddtoshelfrow", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminwebbshopaddtoshelfrow");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminwebbshopnewshelfrow", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminwebbshopnewshelfrow");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminvieworder", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminvieworder");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("adminviewinvoice", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminviewinvoice");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("admincreatecontent", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
@@ -118,10 +173,32 @@ $app->router->add("admincreatecontent", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("admincreateproduct", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admincreateproduct");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("admineditcontent", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
     $app->view->add("take1/admineditcontent");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
+$app->router->add("admineditproduct", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/admineditproduct");
     // $app->view->add("take1/byline");
     // $app->view->add("take1/footer");
 

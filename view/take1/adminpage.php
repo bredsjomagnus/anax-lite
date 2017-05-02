@@ -13,7 +13,8 @@ if (!$app->session->has('user') || $app->session->get('role') != 'admin') {
         <div class="col-md-10 col-md-offset-1">
             <navbar>
                 <a href=<?= $app->url->create('adminpagecontent') ?>>Innehåll</a> |
-                <a href=<?= $app->url->create('adminpageusers') ?>>Konton</a>
+                <a href=<?= $app->url->create('adminpageusers') ?>>Konton</a> |
+                <a href=<?= $app->url->create('adminpagewebbshop') ?>>Webbshop</a>
 
             </navbar>
         </div>

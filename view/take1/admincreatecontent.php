@@ -1,4 +1,7 @@
 <?php
+if (!$app->session->has('user') || $app->session->get('role') != 'admin') {
+    header("Location: login");
+}
 if (isset($_POST['createbtn'])) {
     $title = htmlentities($_POST['contentTitle']);
     $app->database->connect();

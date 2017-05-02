@@ -1,5 +1,5 @@
 -- CREATE DATABASE IF NOT EXISTS kmom04;
-use maaa16;
+use test;
 
 -- show tables;
 

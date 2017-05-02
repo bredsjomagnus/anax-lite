@@ -1,5 +1,7 @@
 <?php
-
+if (!$app->session->has('user') || $app->session->get('role') != 'admin') {
+    header("Location: login");
+}
 if (isset($_GET['id']) && isset($_GET['status'])) {
     $contentId = htmlentities($_GET['id']);
     $contentStatus = htmlentities($_GET['status']);

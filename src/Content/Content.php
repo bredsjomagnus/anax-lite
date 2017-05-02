@@ -38,6 +38,7 @@ class Content
         return $slug;
     }
 
+
     public function checkPath($app, $path, $id)
     {
         $sql = "SELECT path FROM content WHERE path = ? AND NOT id = ?";

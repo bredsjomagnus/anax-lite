@@ -38,6 +38,8 @@ class DBTable
         return $table;
     }
 
+
+
     // nya paginator
     private function paginator($app, $tableproporties)
     {
@@ -251,6 +253,7 @@ class DBTable
                     </span>";
         return $orderby;
     }
+
 
     private function toHtmlSearchUsers($pagenatorarray, $app)
     {
@@ -478,7 +481,7 @@ class DBTable
                     </form>";
 
         // <input class='form-control' type='text' name='contentType' value='".$row->type."'/>
-        
+
         return $table;
     }
 

@@ -1,4 +1,7 @@
 <?php
+if (!$app->session->has('user') || $app->session->get('role') != 'admin') {
+    header("Location: login");
+}
 $contentTitle = "";
 if (isset($_GET['id'])) {
     $contentId = htmlentities($_GET['id']);

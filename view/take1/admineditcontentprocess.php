@@ -1,4 +1,7 @@
 <?php
+if (!$app->session->has('user') || $app->session->get('role') != 'admin') {
+    header("Location: login");
+}
 if (isset($_POST['editcontentbtn'])) {
     $id = $_POST["contentId"];
     $content = new \Maaa16\Content\Content();

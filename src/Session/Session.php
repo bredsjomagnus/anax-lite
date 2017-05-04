@@ -91,6 +91,10 @@ class Session
         var_dump($_SESSION);
     }
 
+    /**
+     * Statusparameters of sessionklass
+     * @return session status parameters
+     */
     public function status()
     {
         $data = [

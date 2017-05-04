@@ -32,3 +32,7 @@ I princip klar med inloggningsfunktioner och administratörsfunktioner.
 v.4.0.0
 --------
 Klar med kmom04.
+
+v5.0.0
+----------
+Klar med kmom05.

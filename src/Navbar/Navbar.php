@@ -29,6 +29,15 @@ class Navbar implements \Anax\Common\ConfigureInterface
         return $this;
     }
 
+    /**
+     * Genereate links in navbar
+     *
+     * @param string $itemkey from item in configfile
+     * @param string $navhtml the generated navbar, so far.
+     * @param array $link with route and text for the links
+     * @param string $class info about the class for the links
+     * @return string $navhtml generated now with items (links).
+     */
     public function generateLinks($itemkey, $navhtml, $link, $class)
     {
         if ($itemkey != 'login' && $itemkey != 'logout') {
@@ -50,6 +59,13 @@ class Navbar implements \Anax\Common\ConfigureInterface
         return $navhtml;
     }
 
+    /**
+     * Genereate dropdown in navbar
+     *
+     * @param string $navhtml the generated navbar, so far.
+     * @param string $active what link is active.
+     * @return string $navhtml generated now with dropdownmenu.
+     */
     public function generateDropdown($navhtml, $active)
     {
         foreach ($this->navbar as $key => $value) {
@@ -82,6 +98,7 @@ class Navbar implements \Anax\Common\ConfigureInterface
     /**
      * Get HTML for the navbar.
      *
+     * @param string $active what link is active
      * @return string as HTML with the navbar.
      */
     public function generateNavbar($active)

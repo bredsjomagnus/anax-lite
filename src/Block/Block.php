@@ -3,6 +3,13 @@ namespace Maaa16\Block;
 
 class Block
 {
+    /**
+    * Get correctly filterad content for a content 'block'
+    *
+    * @param string $blockslug the slug for that content 'block'
+    *
+    * @return string $filteredblockdata
+    */
     public function getBlock($blockslug)
     {
         $blockdata = "";
@@ -23,6 +30,13 @@ class Block
         return $filteredblockdata;
     }
 
+    /**
+     * Set the app object to inject into view rendering phase.
+     *
+     * @param object $app with framework resources.
+     *
+     * @return $this
+     */
     public function setApp($app)
     {
         $this->app = $app;

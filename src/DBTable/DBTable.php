@@ -3,34 +3,65 @@ namespace Maaa16\DBTable;
 
 class DBTable
 {
-
+    /**
+    * Generate table with users/accounts
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return table
+    */
     public function generateDBTableUsers($app, $tableproporties = ["pages" => 5, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
         $table = $this->toHtmlSearchUsers($paginatorarray, $app);
         return $table;
     }
+    /**
+    * Generate table with content
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return table
+    */
     public function generateDBTableContent($app, $tableproporties = ["pages" => 5, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'title', "searchfield" => '%%', "databasetable" => 'content'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
         $table = $this->toHtmlSearchContent($paginatorarray, $app);
         return $table;
     }
-
+    /**
+    * Generate table to edit users/accounts
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return table
+    */
     public function generateDBTableEditUsers($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
         $table = $this->toHtmlEditUsers($paginatorarray);
         return $table;
     }
-
+    /**
+    * Generate table to edit content
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return table
+    */
     public function generateDBTableEditContent($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'title', "searchfield" => '%%', "databasetable" => 'content'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
         $table = $this->toHtmlEditContent($paginatorarray);
         return $table;
     }
-
+    /**
+    * Generate table to edit password
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return table
+    */
     public function generateDBTableEditPassword($app, $tableproporties = ["pages" => 1, "orderby" => 'id',"orderas" => 'desc', "searchcolumn" => 'username', "searchfield" => '%%', "databasetable" => 'accounts'])
     {
         $paginatorarray = $this->paginator($app, $tableproporties);
@@ -40,7 +71,13 @@ class DBTable
 
 
 
-    // nya paginator
+    /**
+    * Generate a paginator for a table
+    *
+    * @param object $app
+    * @param array $tableproporties with parameters for the table - number of pages, order by column and asc/desc, databasetable, searchstring and towards what column.
+    * @return array $paginatorarray with information to append to table
+    */
     private function paginator($app, $tableproporties)
     {
         $dbtable = $tableproporties['databasetable'];
@@ -194,6 +231,14 @@ class DBTable
     //     return $pagenatorarray;
     // }
 
+
+    /**
+    * Generate leftside of the paginator for a table
+    *
+    * @param integer $pagenum page number.
+    * @param string $pagenationrow first part of the paginator
+    * @return string $pagenationrow first part of the paginator with added content
+    */
     private function leftside($pagenum, $pagenationrow)
     {
         if ($pagenum > 1) {
@@ -214,6 +259,14 @@ class DBTable
         return $pagenationrow;
     }
 
+    /**
+    * Generate right side of the paginator for a table
+    *
+    * @param integer $pagenum page number.
+    * @param integer $lastpage lastpage for the paginator
+    * @param string $pagenationrow first part of the paginator containing left side
+    * @return string $paginationrow containing left side and now also right side of paginator
+    */
     private function rightside($pagenum, $lastpage, $pagenationrow)
     {
         for ($i = $pagenum+1; $i <= $lastpage; $i += 1) {
@@ -254,7 +307,13 @@ class DBTable
         return $orderby;
     }
 
-
+    /**
+    * Generate table for users adding paginator to it
+    *
+    * @param array $paginatorarray paginator and tableinformation
+    * @param object $app
+    * @return string $table
+    */
     private function toHtmlSearchUsers($pagenatorarray, $app)
     {
         /*
@@ -320,6 +379,13 @@ class DBTable
         return $table;
     }
 
+    /**
+    * Generate table for content adding paginator to it
+    *
+    * @param array $paginatorarray paginator and tableinformation
+    * @param object $app
+    * @return string $table
+    */
     private function toHtmlSearchContent($pagenatorarray, $app)
     {
         $table = "";
@@ -382,6 +448,12 @@ class DBTable
         return $table;
     }
 
+    /**
+    * Generate table for editing users adding paginator to it
+    *
+    * @param array $paginatorarray paginator and tableinformation
+    * @return string $table
+    */
     private function toHtmlEditUsers($pagenatorarray)
     {
         $table = "<form action='edituserprocess' method='POST'>";
@@ -442,6 +514,12 @@ class DBTable
         return $table;
     }
 
+    /**
+    * Generate table for editing content adding paginator to it
+    *
+    * @param array $paginatorarray paginator and tableinformation
+    * @return string $table
+    */
     private function toHtmlEditContent($pagenatorarray)
     {
         $table = "<form action='admineditcontentprocess' method='POST'>";
@@ -485,6 +563,12 @@ class DBTable
         return $table;
     }
 
+    /**
+    * Generate table for editing passwords adding paginator to it
+    *
+    * @param array $paginatorarray paginator and tableinformation
+    * @return string $table
+    */
     private function toHtmlEditPassword($pagenatorarray)
     {
         $table = "<form action='admineditpasswordprocess' method='POST'>";
@@ -511,6 +595,11 @@ class DBTable
         return $table;
     }
 
+    /**
+    * Generate table for creating users
+    *
+    * @return string $table
+    */
     public function createRowTable()
     {
         $table = "<form action='admincreateuserprocess' method='POST'>";

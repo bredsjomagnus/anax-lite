@@ -356,7 +356,8 @@ class Webshopcontent
             $sql = "SELECT * FROM OrderView WHERE customerid = ?";
             if ($ores = $app->database->executeFetchAll($sql, [$row->id])) {
                 foreach ($ores as $orow) {
-                    $orderlink = "<td><a href='adminvieworder?orderid=$orow->orderid' data-toggle='tooltip' data-placement='right' title='Se order'><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span></a></td>";
+                    $orow;
+                    $orderlink = "<td><a href='adminviewcustomerorders?customerid=$row->id' data-toggle='tooltip' data-placement='right' title='Se kundens ordrar'><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span></a></td>";
                 }
             } else {
                 $orderlink = "<td></td>";

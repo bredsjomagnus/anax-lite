@@ -3,6 +3,13 @@ namespace Maaa16\Textfilter;
 
 class Textfilter
 {
+    /**
+    * Works like a router. Redirecting depending on filter/s
+    *
+    * @param string $text that is to be filtered
+    * @param string $filterstring in form filter1,filter2,filter3,...
+    * @return string $text filtered text.
+    */
     public function doFilter($text, $filterstring)
     {
         $text = strip_tags($text);
@@ -25,12 +32,23 @@ class Textfilter
         return $text;
 
     }
-
+    /**
+    * nl2br filter - making linebreaks in $text
+    *
+    * @param string $text that is to be filterad
+    * @return string filterad text
+    */
     private function nl2br($text)
     {
         return preg_replace(['/[\n]{1}/','/\n+\n/'], ['<br />','<br /><br />'], $text);
     }
 
+    /**
+    * bbcode filter - filter text according to bbcode standard
+    *
+    * @param string $text that is to be filtered
+    * @return string filtered text.
+    */
     private function bbcode($text)
     {
         return preg_replace(['/\[url=(.*)]{1}(.*)(\[\/url])/', '/[\[]+/', '/[\]]+/'], ["<a href='$1'>$2</a>",'<','>'], $text);

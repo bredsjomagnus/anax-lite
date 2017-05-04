@@ -46,6 +46,11 @@ class Guess
 
     }
 
+    /**
+    * Add one to guesses done
+    *
+    * @return void
+    */
     public function addNumberGuessesDone()
     {
         $this->numberGuessesDone += 1;

@@ -22,6 +22,15 @@ class Calendar
         $this->currentyear = date('Y');
     }
 
+    /**
+    * Generates a Calendar
+    *
+    * @param integer $month
+    * @param integer $year
+    * @param twodimensional array $monthInfo with info about month
+    *
+    * @return string $calendar
+    */
     public function generateCalendar($month, $year, $monthInfo)
     {
         /*
@@ -108,6 +117,14 @@ class Calendar
         return $calendar;
     }
 
+    /**
+    * Collect information for the day
+    *
+    * @param integer $datum
+    * @param twodimensional array $monthInfo info about the month
+    *
+    * @return array $day info about the day
+    */
     public function getDayInfo($datum, $monthInfo)
     {
         /*
@@ -122,6 +139,13 @@ class Calendar
         return $day;
     }
 
+    /**
+    * Collect informaiton of the month
+    *
+    * @param array $monthInfoResponse informaiton collected from api in json
+    *
+    * @return twodimensional array $monthInfo
+    */
     public function extractMonthInfo($monthInfoResponse)
     {
 
@@ -167,6 +191,16 @@ class Calendar
         return $monthInfo;
     }
 
+
+    /**
+    * Genereate one cell - td - in Calendar table
+    *
+    * @param integer $thismonth
+    * @param integer $datum
+    * @param array $dayInfo information about the day
+    *
+    * @return string $calendar a td cell
+    */
     public function printTd($thismonth, $datum, $dayInfo)
     {
         /*
@@ -200,6 +234,13 @@ class Calendar
         return $calendar;
     }
 
+    /**
+    * Collects namnsdagar for the day
+    *
+    * @param array $dayInfo information about the day
+    *
+    * @return string $names
+    */
     public function getNames($dayInfo)
     {
         // Tar du ut de namnsdagar som finns för dagen.
@@ -211,6 +252,13 @@ class Calendar
         return $names;
     }
 
+    /**
+    * Collect hollidayinfo for a day
+    *
+    * @param array $dayInfo
+    *
+    * @return string $holliday
+    */
     public function getHollidays($dayInfo)
     {
         // Tar ut de flaggdagar, helgaftnar och helgdagar som finns för dagen.
@@ -236,12 +284,27 @@ class Calendar
 
         return $holliday;
     }
+
+    /**
+    * Generate image for the month
+    *
+    * @param integer $month
+    *
+    * @return string $image
+    */
     public function generateImage($month)
     {
         $image = "<img src='". $this->images[$month-1] ."' alt='Kalenderbild' />";
         return $image;
     }
 
+    /**
+    * Convert monthinteger to monthstring
+    *
+    * @param integer $monthnumber
+    *
+    * @return string month
+    */
     public function getMonthString($monthnumber)
     {
         return $this->monthsString[$monthnumber-1];

@@ -674,7 +674,7 @@ END
 DELIMITER ;
 
 
--- NY ORDER
+-- NY ORDER för customer 2
 INSERT INTO `Order`
 (
 	customer
@@ -708,7 +708,7 @@ VALUES
     3
 );
 
--- NY ORDER
+-- NY ORDER för customer 3
 INSERT INTO `Order`
 (
 	customer
@@ -754,18 +754,14 @@ VALUES
     1
 );
 
--- NY ORDER
+-- NY ORDER FÖR CUSTOMER 4
 INSERT INTO `Order`
 (
-	customer,
-    delivery,
-    `status`
+	customer
 )
 VALUES
 (
-	4,
-    NOW(),
-    'notDelivered'
+	4
 );
 INSERT INTO OrderRow
 (
@@ -792,7 +788,43 @@ VALUES
     1
 );
 
-UPDATE `Order` SET `status` = 'delivered' WHERE id = 3;
+-- NY ORDER FÖR CUSTOMER 4
+INSERT INTO `Order`
+(
+	customer
+)
+VALUES
+(
+	4
+);
+INSERT INTO OrderRow
+(
+	`order`,
+    product,
+    items
+)
+VALUES
+(
+	4,
+    'art-memory',
+    1
+);
+INSERT INTO OrderRow
+(
+	`order`,
+    product,
+    items
+)
+VALUES
+(
+	4,
+    'art-western',
+    1
+);
+
+SELECT * FROM `Order`;
+UPDATE `Order` SET `status` = 'delivered', delivery = NOW() WHERE id = 3;
+-- UPDATE Invoice SET invoicestatus = 'payed', payed = NOW() WHERE id = 3;
 
 CREATE VIEW OrderView AS
 SELECT

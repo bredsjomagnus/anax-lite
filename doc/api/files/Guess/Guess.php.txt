@@ -1,0 +1,124 @@
+<?php
+namespace Maaa16\Guess;
+
+class Guess
+{
+    /**
+     * Properties
+     */
+    private $randomizedNumber;
+    public $numberGuessesDone;
+    public $guessedNumber;
+    public $maxnumber;
+    const MAXGUESSES = 6;
+
+    /**
+    * Constructor.
+    *
+    * @param int $numberGuessesDone the number of guesses done.
+    *
+    * @return self
+    */
+    public function __construct($random, $numberGuessesDone)
+    {
+        $this->$numberGuessesDone = $numberGuessesDone;
+        // $this->maxnumber = $maxnumber;
+        $this->maxnumber = 100;
+        if ($random == "random") {
+            $this->setRandomizedNumber($random);
+        } else {
+            $this->setRandomizedNumber($random);
+        }
+    }
+
+    /**
+    * Set randomized number
+    *
+    * @param string, integer $random
+    */
+    public function setRandomizedNumber($random)
+    {
+        if ($random == "random") {
+            $this->randomizedNumber = rand(1, $this->maxnumber);
+        } else {
+            $this->randomizedNumber = $random;
+        }
+
+    }
+
+    /**
+    * Add one to guesses done
+    *
+    * @return void
+    */
+    public function addNumberGuessesDone()
+    {
+        $this->numberGuessesDone += 1;
+        // echo "inne i addNumberGuessesDone: number_guesses_done = " . $this->number_guesses_done;
+    }
+
+    // public function subNumberGuessesDone()
+    // {
+    //     $this->numberGuessesDone -= 1;
+    // }
+
+    /**
+    * Get information about the random number
+    *
+    * @return $randomizedNumber
+    */
+    public function getRandomizedNumber()
+    {
+        return $this->randomizedNumber;
+    }
+
+    /**
+    * Get information about number of guesses done
+    *
+    * @return $numberGuessesDone
+    */
+    public function getNumberOfGuesses()
+    {
+        return $this->numberGuessesDone;
+    }
+
+    public function setNumberOfGuesses($nog)
+    {
+        $this->numberGuessesDone = $nog;
+    }
+
+    /**
+    * Get result from a guess
+    *
+    * @param int $guessednumber. The number a user guessed on.
+    *
+    * @return string $result. The result of that guessed
+    */
+    public function getResult($guessednumber)
+    {
+
+        if ($guessednumber == $this->randomizedNumber) {
+            $result = "Right on spot. " . $guessednumber . " is correct!";
+        } else if ($guessednumber < $this->randomizedNumber) {
+            $result = $guessednumber . " is not correct. It's to low!";
+        } else if ($guessednumber > $this->randomizedNumber) {
+            $result = $guessednumber . " is not correct. It's to high!";
+        }
+
+
+        return $result;
+    }
+
+    /**
+    * Get number of guesses left to do
+    *
+    * @param int $numberofguessesdone so FilesystemIterator
+    *
+    * @return int $guessesleft to do
+    */
+    public function getLeft($numberofguessesdone)
+    {
+        return self::MAXGUESSES - $numberofguessesdone;
+    }
+}
+

@@ -19,6 +19,16 @@ class Content
         return $str;
     }
 
+    /**
+    * See to it that every slug is unique
+    *
+    * @param object $app
+    * @param integer $sluglength length of slug
+    * @param string $slug the slug it self
+    * @param integer $id id number of contet to which slug belongs
+    *
+    * @return string $slug a unique slug
+    */
     public function makeSlugUnique($app, $sluglength, $slug, $id)
     {
         $counter = 2;
@@ -38,7 +48,15 @@ class Content
         return $slug;
     }
 
-
+    /**
+    * See to it that if path already exists it will be set to null
+    *
+    * @param object $app
+    * @param string $path the path to check
+    * @param integer $id to check database with
+    *
+    * @return string $path which is null if other exact same path existed before
+    */
     public function checkPath($app, $path, $id)
     {
         $sql = "SELECT path FROM content WHERE path = ? AND NOT id = ?";
@@ -49,6 +67,16 @@ class Content
         return $path;
     }
 
+    /**
+    * Collect right filters in array
+    *
+    * @param boolean $markdown is markdown choosen
+    * @param boolean $bbcode is bbcode choosen
+    * @param boolean $link is link choosen
+    * @param boolean $nl2br is nl2br choosen
+    *
+    * @return array $blogfilter with correct filters in correct order.
+    */
     public function getFilters($markdown, $bbcode, $link, $nl2br)
     {
         $bloggarray = [];

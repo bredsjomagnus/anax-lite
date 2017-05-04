@@ -151,6 +151,17 @@ $app->router->add("adminvieworder", function () use ($app) {
                   ->send();
 });
 
+$app->router->add("adminviewcustomerorders", function () use ($app) {
+    $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
+    // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);
+    $app->view->add("take1/adminviewcustomerorders");
+    // $app->view->add("take1/byline");
+    // $app->view->add("take1/footer");
+
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
+});
+
 $app->router->add("adminviewinvoice", function () use ($app) {
     $app->view->add("take1/header", ["title" => "Administratör", "urlstyle" => dirname(dirname($_SERVER['PHP_SELF']))."/css/adminstyle.css"]);
     // $app->view->add("navbar2/navbar", ["active" => "accountinfo"]);

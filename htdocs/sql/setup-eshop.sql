@@ -1,4 +1,4 @@
-use maaa16;
+use test;
 
 
 SET NAMES utf8;
@@ -882,6 +882,16 @@ SELECT * FROM InvoiceView;
 
 -- SELECT * FROM InvoiceRow WHERE `order` = 3;
 
+SELECT * FROM ShelfSection;
+EXPLAIN SELECT * FROM ShelfSection WHERE description = 'A1';
+CREATE INDEX index_description ON ShelfSection(description);
+
+
+EXPLAIN SELECT * FROM Customer WHERE email = 'bredsjoanna@gmail.com';
+ALTER TABLE Customer ADD CONSTRAINT email_unique UNIQUE (email);
+
+CREATE INDEX index_forname ON Customer(forname);
+EXPLAIN SELECT * FROM Orderview WHERE firstname = 'Anna';
 
 -- SELECT * FROM Customer;
 -- SELECT * FROM ShelfSection;

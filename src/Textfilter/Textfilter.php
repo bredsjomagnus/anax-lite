@@ -51,7 +51,9 @@ class Textfilter
     */
     private function bbcode($text)
     {
-        return preg_replace(['/\[url=(.*)]{1}(.*)(\[\/url])/', '/[\[]+/', '/[\]]+/'], ["<a href='$1'>$2</a>",'<','>'], $text);
+        $regex = ['/\[url]{1}(.*)(\[\/url])/', '/\[url=(.*)]{1}(.*)(\[\/url])/', '/\[img]{1}(.*)(\[\/img])/', '/\[img=(\d*)x(\d*)](.*)(\[\/img])/', '/[\[]+/', '/[\]]+/'];
+        $replaceTo = ["<a href='$1'>$1</a>", "<a href='$1'>$2</a>", "<img src='$1' />", "<img src='$3' width='$1' height='$2' />", '<','>'];
+        return preg_replace($regex, $replaceTo, $text);
     }
 
     /**

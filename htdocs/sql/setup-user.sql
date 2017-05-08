@@ -1,5 +1,5 @@
 -- show databases;
-use test;
+use maaa16;
 
 drop table if exists accounts;
 
@@ -37,3 +37,10 @@ select * from accounts;
 -- select * from accounts where binary username = binary'Magand';
 
 -- show tables;
+
+-- - Ger full tabellsökning utan unique index
+EXPLAIN SELECT * FROM accounts WHERE email = 'bredsjoanna@gmail.com';
+
+-- - Ger en radssökning med unique index
+CREATE UNIQUE INDEX unique_email ON accounts(email);
+

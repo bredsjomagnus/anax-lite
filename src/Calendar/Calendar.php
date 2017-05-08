@@ -57,7 +57,7 @@ class Calendar
 
         // Rubrikrad med måndag, tisdag, ..., söndag
         $calendar .= "<thead>";
-        $calendar.= '<tr class="calrow"><th></th><th class="calday-head">'.implode('</th><th class="calday-head">', $this->weekdays).'</th></tr>';
+        $calendar .= '<tr class="calrow"><th></th><th class="calday-head">'.implode('</th><th class="calday-head">', $this->weekdays).'</th></tr>';
         $calendar .= "</thead>";
 
         // Skriver ut de tomma rutorna innan $month börjar

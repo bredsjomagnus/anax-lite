@@ -1,4 +1,4 @@
-use test;
+use maaa16;
 
 
 SET NAMES utf8;
@@ -295,6 +295,7 @@ VALUES
 );
 
 
+
 -- TRANSACTION AND PROCEDUR FOR ADDING NEW PRODUCTS
 DELIMITER //
 
@@ -393,6 +394,10 @@ CALL insertProduct('art-blood-bowl', 'Blood Bowl','Denna gamla klassiker har nu 
 CALL insertProduct('art-memory', 'Memory', 'Det perfekta klassiska spelet där du inte behöver göra dig för att barent skall vinna.', 'noproductimage', 79.90,'Barnspel');
 CALL insertProduct('art-memory', 'Memory', 'Det perfekta klassiska spelet där du inte behöver göra dig för att barent skall vinna.', 'noproductimage', 79.90, 'Klassiskt');
 CALL insertProduct('art-xcom', 'XCOM', 'Ett intensivt spel som kräver stresståligt samarbete. Förbered dig på en utmanande kamp mot aliens.', 'xcom128x128.jpg', 689.00, 'Strategispel');
+
+-- set profiling=1;
+-- CALL insertProduct('art-monopoly', 'Schack', 'Det klassiska schacket som funnits med sedan tusentals år tillbaka.', 'chess128x128.jpg', 128.00, 'Brädspel');
+-- show profiles;
 
 -- SELECT * FROM Prod2Cat;
 -- SELECT * FROM Product;
@@ -851,6 +856,10 @@ FROM OrderRow AS ORow
 GROUP BY orderid
 ;
 
+EXPLAIN OrderView;
+EXPLAIN SELECT * FROM OrderView;
+
+
 CREATE VIEW InvoiceView AS
 SELECT
 	I.id AS invoiceid,
@@ -882,16 +891,6 @@ SELECT * FROM InvoiceView;
 
 -- SELECT * FROM InvoiceRow WHERE `order` = 3;
 
-SELECT * FROM ShelfSection;
-EXPLAIN SELECT * FROM ShelfSection WHERE description = 'A1';
-CREATE INDEX index_description ON ShelfSection(description);
-
-
-EXPLAIN SELECT * FROM Customer WHERE email = 'bredsjoanna@gmail.com';
-ALTER TABLE Customer ADD CONSTRAINT email_unique UNIQUE (email);
-
-CREATE INDEX index_forname ON Customer(forname);
-EXPLAIN SELECT * FROM Orderview WHERE firstname = 'Anna';
 
 -- SELECT * FROM Customer;
 -- SELECT * FROM ShelfSection;
@@ -904,3 +903,40 @@ EXPLAIN SELECT * FROM Orderview WHERE firstname = 'Anna';
 -- InventoryIsoladedView ger möjlighet att ta ut enbart delar av inventoryt. Speciellt om man kör concat på sökfrågan.
 -- SELECT GROUP_CONCAT(shelfsection), GROUP_CONCAT(shelfrowid), title, GROUP_CONCAT(items) FROM InventoryIsolatedView WHERE storagesection = 'A' GROUP BY title;
 -- SELECT GROUP_CONCAT(shelfsection), GROUP_CONCAT(shelfrowid), title, GROUP_CONCAT(items) FROM InventoryIsolatedView GROUP BY title;
+
+
+-- ----------------------- 
+-- Indexering 
+-- -----------------------
+-- - se index
+-- SHOW INDEX FROM Course;
+
+-- - likvärdiga varianter att skapa unique index
+-- ALTER TABLE Course ADD CONSTRAINT nick_unique UNIQUE (nick);
+-- CREATE UNIQUE INDEX nick_unique ON Course (nick);
+
+-- - skapa index
+-- CREATE INDEX index_name ON Course(name);
+-- ta bort index
+-- DROP INDEX nick_unique ON Course;
+
+-- - fulltext index
+-- CREATE FULLTEXT INDEX full_name ON Course(name);
+-- - sökning av fulltext index
+-- SELECT name, MATCH(name) AGAINST ("Program* web*" IN BOOLEAN MODE) AS score FROM Course ORDER BY score DESC;
+-- - ta bort fulltext index
+-- DROP INDEX fulltext_name ON Course;
+
+-- - hur skapas tabell. Lägg till \G om skriver i cli
+-- SHOW CREATE TABLE Course
+
+
+
+-- SHELFSECTION
+-- - Utan index ger sökning på ShelfSection description en full tabellsökning.
+EXPLAIN SELECT * FROM ShelfSection WHERE description = 'A1';
+
+-- - Med unique index söktes bara en rad
+CREATE UNIQUE INDEX unique_description ON ShelfSection (description);
+
+

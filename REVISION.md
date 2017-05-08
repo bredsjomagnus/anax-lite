@@ -36,3 +36,7 @@ Klar med kmom04.
 v5.0.0
 ----------
 Klar med kmom05.
+
+v6.0.1
+----------
+Påböjat arbetet med kmom06.

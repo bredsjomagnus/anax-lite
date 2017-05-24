@@ -21,6 +21,9 @@
         <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom06" aria-expanded="false" aria-controls="kmom06">
             Kmom06
         </a>
+        <a class="btn btn-primary" role="button" data-toggle="collapse" href="#kmom10" aria-expanded="false" aria-controls="kmom10">
+            Kmom10
+        </a>
 
         <div class="collapse" id="kmom01">
             <div class="pillow-50">
@@ -162,6 +165,17 @@
                 <?= $app->block->getBlock('kmom06'); ?>
             </div>
         </div>
-        <!-- /kmom05 -->
+        <!-- /kmom06 -->
+
+        <!-- kmom10 -->
+        <div class="collapse" id="kmom10">
+            <div class="pillow-50">
+
+            </div>
+            <div class="well reportwell">
+                <?= $app->block->getBlock('kmom10'); ?>
+            </div>
+        </div>
+        <!-- /kmom10 -->
     </div>
 </div>
